@@ -1,364 +1,278 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Wedding invitation for Shreif & Monica — November 21, 2026."
-    />
-    <title>Shreif & Monica | Wedding Invitation</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="style.css" />
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Wedding invitation for Shreif & Monica — November 21, 2026." />
+  <title>Shreif & Monica | Wedding Invitation</title>
 
-  <body>
-    <header class="site-header" id="home">
-      <a class="brand" href="#home" aria-label="Shreif and Monica home">
-        <span class="brand-mark">♡</span>
-        <span>SHREIF <b>&</b> MONICA</span>
-      </a>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@400;500;600&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
 
-      <button
-        class="menu-toggle"
-        id="menuToggle"
-        aria-label="Open menu"
-        aria-expanded="false"
-      >
-        <span></span><span></span><span></span>
-      </button>
+<body>
+  <header class="site-header" id="home">
+    <a class="brand" href="#home" aria-label="Shreif and Monica home">
+      <span class="brand-mark">♡</span>
+      <span>SHREIF <b>&</b> MONICA</span>
+    </a>
 
-      <nav class="nav" id="nav">
-        <a class="active" href="#home">Home</a>
-        <a href="#story">Our Story</a>
-        <a href="#details">Details</a>
-        <a href="#gallery">Gallery</a>
-        <a href="#rsvp">RSVP</a>
-        <button
-          class="music-btn"
-          id="musicBtn"
-          type="button"
-          aria-label="Toggle music"
-        >
-          ♫
-        </button>
-      </nav>
-      <audio id="weddingAudio" loop>
-        <source
-          src="assets/موسيقى خايف أقول اللي بقلبي.mp3"
-          type="audio/mpeg"
-        />
-      </audio>
-    </header>
+    <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
 
-    <main>
-      <section class="hero section-pad">
-        <div class="hero-floral floral-left">✿<br />❀<br />❁</div>
-        <div class="hero-content">
-          <p class="eyebrow">TOGETHER FOREVER</p>
-          <h1>SHREIF <span>&</span><br />MONICA</h1>
-          <div class="ornament">
-            <i></i><span>ARE GETTING MARRIED</span><i></i>
-          </div>
-          <p class="hero-date">21 · 11 · 2026</p>
+    <nav class="nav" id="nav">
+      <a class="active" href="#home">Home</a>
+      <a href="#story">Our Story</a>
+      <a href="#details">Details</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#rsvp">RSVP</a>
+    </nav>
+    <audio id="weddingAudio" loop>
+      <source src="assets/موسيقى خايف أقول اللي بقلبي.mp3" type="audio/mpeg" />
+    </audio>
+  </header>
+  <button class="music-btn floating-music" id="musicBtn" type="button" aria-label="Toggle music">
+    ♫
+  </button>
+  <main>
+    <section class="hero section-pad">
+      <div class="hero-floral floral-left">✿<br />❀<br />❁</div>
+      <div class="hero-content">
+        <p class="eyebrow">TOGETHER FOREVER</p>
+        <h1>SHREIF <span>&</span><br />MONICA</h1>
+        <div class="ornament">
+          <i></i><span>ARE GETTING MARRIED</span><i></i>
+        </div>
+        <p class="hero-date">21 · 11 · 2026</p>
 
-          <div class="countdown" aria-label="Countdown to the wedding">
-            <div><strong id="days">--</strong><small>DAYS</small></div>
-            <div><strong id="hours">--</strong><small>HOURS</small></div>
-            <div><strong id="minutes">--</strong><small>MINUTES</small></div>
-            <div><strong id="seconds">--</strong><small>SECONDS</small></div>
-          </div>
-
-          <a class="btn btn-gold" href="#story"
-            >EXPLORE OUR STORY <span>⌄</span></a
-          >
+        <div class="countdown" aria-label="Countdown to the wedding">
+          <div><strong id="days">--</strong><small>DAYS</small></div>
+          <div><strong id="hours">--</strong><small>HOURS</small></div>
+          <div><strong id="minutes">--</strong><small>MINUTES</small></div>
+          <div><strong id="seconds">--</strong><small>SECONDS</small></div>
         </div>
 
-        <div class="hero-image">
-          <img
-            src="assets/شريف 2.jpg"
-            alt="Wedding couple holding hands"
-          />
-        </div>
-        <div class="hero-floral floral-right">❀<br />✿<br />❁</div>
-      </section>
-
-      <section class="story section-pad" id="story">
-        <div class="section-heading">
-          <p class="eyebrow">OUR STORY</p>
-          <h2>A Journey of Two Hearts</h2>
-        </div>
-
-        <div class="story-grid">
-          <article class="story-card">
-            <p class="eyebrow">THE BEGINNING</p>
-            <h3>How We Met</h3>
-            <p class="story-date">Your date here</p>
-            <p>
-              Replace this paragraph with the real story of how Shreif and
-              Monica first met. Keep it short, personal, and warm.
-            </p>
-          </article>
-
-          <div class="story-photo">
-            <img
-              src="assets/شريف 1.jpg"
-              alt="Couple walking together"
-            />
-            <span class="photo-heart">♡</span>
-          </div>
-
-          <article class="story-card">
-            <p class="eyebrow">THE PROPOSAL</p>
-            <h3>The Big Question</h3>
-            <p class="story-date">Your engagement date here</p>
-            <p>
-              Add the engagement story here. This section is intentionally easy
-              to edit once you give me their real story.
-            </p>
-          </article>
-        </div>
-
-        <div class="timeline">
-          <div class="timeline-item">
-            <span>♡</span><b>The Beginning</b><small>DATE</small>
-          </div>
-          <div class="timeline-line"></div>
-          <div class="timeline-item">
-            <span>♧</span><b>First Date</b><small>DATE</small>
-          </div>
-          <div class="timeline-line"></div>
-          <div class="timeline-item">
-            <span>♢</span><b>Engagement</b><small>DATE</small>
-          </div>
-          <div class="timeline-line"></div>
-          <div class="timeline-item">
-            <span>♡</span><b>Wedding Day</b><small>November 21, 2026</small>
-          </div>
-        </div>
-      </section>
-
-      <section class="details" id="details">
-        <div class="details-image">
-          <img
-            src="assets/الكنيسة.jpg"
-            alt="Church exterior"
-          />
-        </div>
-
-        <div class="details-content">
-          <p class="eyebrow">THE WEDDING</p>
-          <h2>Join Us</h2>
-
-          <div class="detail-row">
-            <span>▣</span>
-            <div><b>November 21, 2026</b></div>
-          </div>
-          <div class="detail-row">
-            <span>◷</span>
-            <div>
-              <b>Wedding Time</b><small>Replace with the exact time</small>
-            </div>
-          </div>
-          <div class="detail-row">
-            <span>⌖</span>
-            <div>
-              <b>St. Mary Virgin Church – Ard El Golf</b
-              ><small>Cairo, Egypt</small>
-            </div>
-          </div>
-
-          <a
-            class="btn btn-gold"
-            target="_blank"
-            rel="noopener"
-            href="https://www.google.com/maps/search/?api=1&query=St.+Mary+Virgin+Church+Ard+El+Golf+Cairo"
-          >
-            OPEN IN GOOGLE MAPS ↗
-          </a>
-        </div>
-
-        <div class="quote">
-          <span>✝</span>
-          <p>
-            Two hearts.<br />One beautiful journey.<br /><em
-              >Forever begins here.</em
-            >
-          </p>
-          <div>❧ ♡ ❧</div>
-        </div>
-      </section>
-
-      <section class="gallery section-pad" id="gallery">
-        <div class="section-heading row-heading">
-          <div>
-            <p class="eyebrow">OUR MEMORIES</p>
-            <h2>A Few Moments</h2>
-          </div>
-          <a href="#gallery" class="btn btn-outline">VIEW ALL PHOTOS</a>
-        </div>
-
-        <div class="gallery-grid">
-          <img
-            src="assets/شريف 1.jpg"
-            alt="Wedding memory"
-          />
-          <img
-            src="assets/شريف 1.jpg"
-            alt="Wedding flowers"
-          />
-          <img
-            src="assets/شريف 1.jpg"
-            alt="Couple travel memory"
-          />
-          <img
-            src="assets/شريف 2.jpg"
-            alt="Wedding invitation detail"
-          />
-          <img
-            src="assets/شريف 1.jpg"
-            alt="Couple together"
-          />
-        </div>
-      </section>
-
-      <section class="rsvp section-pad" id="rsvp">
-        <div class="rsvp-intro">
-          <p class="eyebrow">RSVP</p>
-          <h2>Will you join us?</h2>
-          <p>
-            Please let us know if you'll be attending and leave us a special
-            message.
-          </p>
-        </div>
-
-        <form class="rsvp-form" id="rsvpForm">
-          <div class="field">
-            <label for="name">Full Name <span>*</span></label>
-            <input
-              id="name"
-              name="name"
-              type="text"
-              placeholder="Your name"
-              required
-            />
-          </div>
-
-          <fieldset class="field">
-            <legend>Will you attend? <span>*</span></legend>
-            <label class="radio"
-              ><input type="radio" name="attendance" value="Yes" required />
-              Yes, I'll be there</label
-            >
-            <label class="radio"
-              ><input type="radio" name="attendance" value="No" /> Sorry, I
-              can't make it</label
-            >
-          </fieldset>
-
-          <div class="field guest-field">
-            <label for="guests">Number of Guests</label>
-            <div class="stepper">
-              <button type="button" data-action="minus">−</button>
-              <input
-                id="guests"
-                name="guests"
-                type="number"
-                min="1"
-                max="10"
-                value="1"
-                readonly
-              />
-              <button type="button" data-action="plus">+</button>
-            </div>
-          </div>
-
-          <div class="field message-field">
-            <label for="message">Your Message</label>
-            <textarea
-              id="message"
-              name="message"
-              rows="3"
-              placeholder="Write a message for Shreif & Monica..."
-            ></textarea>
-          </div>
-
-          <button class="btn btn-gold submit-btn" type="submit">
-            SEND RSVP <span>➤</span>
-          </button>
-          <p class="form-status" id="formStatus" role="status"></p>
-        </form>
-      </section>
-
-      <section class="location section-pad">
-        <div class="map-placeholder">
-          <iframe
-            src="https://www.google.com/maps?q=St.+Mary+Virgin+Church+Ard+El+Golf+Cairo+Egypt&output=embed"
-            width="100%"
-            height="100%"
-            style="border: 0"
-            allowfullscreen=""
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-          >
-          </iframe>
-        </div>
-
-        <div class="location-content">
-          <p class="eyebrow">FIND YOUR WAY TO US</p>
-          <h2>St. Mary Virgin Church</h2>
-          <p>Ard El Golf, Cairo, Egypt</p>
-          <a
-            class="btn btn-outline"
-            target="_blank"
-            rel="noopener"
-            href="https://maps.app.goo.gl/JCj6JdSHnn5YbK9x9"
-          >
-            GET DIRECTIONS ↗
-          </a>
-        </div>
-
-        <div class="contact-note">
-          <span>♡</span>
-          <p>For any questions,<br />feel free to contact us.</p>
-        </div>
-      </section>
-    </main>
-
-    <
-    <footer class="footer">
-      <span>♡</span>
-
-      <p>SHREIF & MONICA &nbsp; ♡ &nbsp; 21 · 11 · 2026</p>
-
-      <div class="socials">
-        <a href="https://www.instagram.com/yousabsaid5/?hl=en" aria-label="Instagram">◎</a>
-        <a href="https://www.facebook.com/share/19WqVXzMLC/" aria-label="Facebook">f</a>
+        <a class="btn btn-gold" href="#story">EXPLORE OUR STORY <span>⌄</span></a>
       </div>
 
-      <small>
-        Designed & Developed by
-        <a
-          href="https://www.linkedin.com/in/yousab-said-149688271"
-          target="_blank"
-          rel="noopener"
-        >
-          Yousab Said
-        </a>
-      </small>
-    </footer>
+      <div class="hero-image">
+        <img src="assets/شريف 2.jpg" alt="Wedding couple holding hands" />
+      </div>
+      <div class="hero-floral floral-right">❀<br />✿<br />❁</div>
+    </section>
 
-    <audio id="weddingAudio" loop preload="none">
-      <!-- Add your own audio file here if desired:
-    <source src="assets/song.mp3" type="audio/mpeg">
-    --></audio>
+    <section class="story section-pad" id="story">
+      <div class="section-heading">
+        <p class="eyebrow">OUR STORY</p>
+        <h2>A Journey of Two Hearts</h2>
+      </div>
+
+      <div class="story-grid">
+        <article class="story-card">
+          <p class="eyebrow">THE BEGINNING</p>
+          <h3>How We Met</h3>
+          <p class="story-date">Your date here</p>
+          <p>
+            Replace this paragraph with the real story of how Shreif and
+            Monica first met. Keep it short, personal, and warm.
+          </p>
+        </article>
+
+        <div class="story-photo">
+          <img src="assets/شريف 1.jpg" alt="Couple walking together" />
+          <span class="photo-heart">♡</span>
+        </div>
+
+        <article class="story-card">
+          <p class="eyebrow">THE PROPOSAL</p>
+          <h3>The Big Question</h3>
+          <p class="story-date">Your engagement date here</p>
+          <p>
+            Add the engagement story here. This section is intentionally easy
+            to edit once you give me their real story.
+          </p>
+        </article>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <span>♡</span><b>The Beginning</b><small>DATE</small>
+        </div>
+        <div class="timeline-line"></div>
+        <div class="timeline-item">
+          <span>♧</span><b>First Date</b><small>DATE</small>
+        </div>
+        <div class="timeline-line"></div>
+        <div class="timeline-item">
+          <span>♢</span><b>Engagement</b><small>DATE</small>
+        </div>
+        <div class="timeline-line"></div>
+        <div class="timeline-item">
+          <span>♡</span><b>Wedding Day</b><small>November 21, 2026</small>
+        </div>
+      </div>
+    </section>
+
+    <section class="details" id="details">
+      <div class="details-image">
+        <img src="assets/الكنيسة.jpg" alt="Church exterior" />
+      </div>
+
+      <div class="details-content">
+        <p class="eyebrow">THE WEDDING</p>
+        <h2>Join Us</h2>
+
+        <div class="detail-row">
+          <span>▣</span>
+          <div><b>November 21, 2026</b></div>
+        </div>
+        <div class="detail-row">
+          <span>◷</span>
+          <div>
+            <b>Wedding Time</b><small>Replace with the exact time</small>
+          </div>
+        </div>
+        <div class="detail-row">
+          <span>⌖</span>
+          <div>
+            <b>St. Mary Virgin Church – Ard El Golf</b><small>Cairo, Egypt</small>
+          </div>
+        </div>
+
+        <a class="btn btn-gold" target="_blank" rel="noopener"
+          href="https://www.google.com/maps/search/?api=1&query=St.+Mary+Virgin+Church+Ard+El+Golf+Cairo">
+          OPEN IN GOOGLE MAPS ↗
+        </a>
+      </div>
+
+      <div class="quote">
+        <span>✝</span>
+        <p>
+          Two hearts.<br />One beautiful journey.<br /><em>Forever begins here.</em>
+        </p>
+        <div>❧ ♡ ❧</div>
+      </div>
+    </section>
+
+    <section class="gallery section-pad" id="gallery">
+      <div class="section-heading row-heading">
+        <div>
+          <p class="eyebrow">OUR MEMORIES</p>
+          <h2>A Few Moments</h2>
+        </div>
+        <a href="#gallery" class="btn btn-outline">VIEW ALL PHOTOS</a>
+      </div>
+
+      <div class="gallery-grid">
+        <img src="assets/شريف 1.jpg" alt="Wedding memory" />
+        <img src="assets/شريف 1.jpg" alt="Wedding flowers" />
+        <img src="assets/شريف 1.jpg" alt="Couple travel memory" />
+        <img src="assets/شريف 2.jpg" alt="Wedding invitation detail" />
+        <img src="assets/شريف 1.jpg" alt="Couple together" />
+      </div>
+    </section>
+
+    <section class="rsvp section-pad" id="rsvp">
+      <div class="rsvp-intro">
+        <p class="eyebrow">RSVP</p>
+        <h2>Will you join us?</h2>
+        <p>
+          Please let us know if you'll be attending and leave us a special
+          message.
+        </p>
+      </div>
+
+      <form class="rsvp-form" id="rsvpForm">
+        <div class="field">
+          <label for="name">Full Name <span>*</span></label>
+          <input id="name" name="name" type="text" placeholder="Your name" required />
+        </div>
+
+        <fieldset class="field">
+          <legend>Will you attend? <span>*</span></legend>
+          <label class="radio"><input type="radio" name="attendance" value="Yes" required />
+            Yes, I'll be there</label>
+          <label class="radio"><input type="radio" name="attendance" value="No" /> Sorry, I
+            can't make it</label>
+        </fieldset>
+
+        <div class="field guest-field">
+          <label for="guests">Number of Guests</label>
+          <div class="stepper">
+            <button type="button" data-action="minus">−</button>
+            <input id="guests" name="guests" type="number" min="1" max="10" value="1" readonly />
+            <button type="button" data-action="plus">+</button>
+          </div>
+        </div>
+
+        <div class="field message-field">
+          <label for="message">Your Message</label>
+          <textarea id="message" name="message" rows="3"
+            placeholder="Write a message for Shreif & Monica..."></textarea>
+        </div>
+
+        <button class="btn btn-gold submit-btn" type="submit">
+          SEND RSVP <span>➤</span>
+        </button>
+        <p class="form-status" id="formStatus" role="status"></p>
+      </form>
+    </section>
+
+    <section class="location section-pad">
+      <div class="map-placeholder">
+        <iframe src="https://www.google.com/maps?q=St.+Mary+Virgin+Church+Ard+El+Golf+Cairo+Egypt&output=embed"
+          width="100%" height="100%" style="border: 0" allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+
+      <div class="location-content">
+        <p class="eyebrow">FIND YOUR WAY TO US</p>
+        <h2>St. Mary Virgin Church</h2>
+        <p>Ard El Golf, Cairo, Egypt</p>
+        <a class="btn btn-outline" target="_blank" rel="noopener" href="https://maps.app.goo.gl/JCj6JdSHnn5YbK9x9">
+          GET DIRECTIONS ↗
+        </a>
+      </div>
+
+      <div class="contact-note">
+        <span>♡</span>
+        <p>For any questions,<br />feel free to contact us.</p>
+      </div>
+    </section>
+  </main>
+
+<footer class="footer">
+  <span>♡</span>
+
+  <p>SHREIF & MONICA &nbsp; ♡ &nbsp; 21 · 11 · 2026</p>
+
+  <small class="developer-credit">
+    Designed & Developed by
+    <a href="https://www.linkedin.com/in/yousab-said-149688271" target="_blank" rel="noopener">
+      Yousab Said
+    </a>
+
+    <span class="developer-socials">
+      <a href="https://www.instagram.com/yousabsaid5/?hl=en" target="_blank" rel="noopener" aria-label="Instagram">
+        ◎
+      </a>
+      <a href="https://www.facebook.com/share/19WqVXzMLC/" target="_blank" rel="noopener" aria-label="Facebook">
+        f
+      </a>
+    </span>
+  </small>
+</footer>
+
+
 
     <script src="script.js"></script>
-  </body>
+</body>
+
 </html>

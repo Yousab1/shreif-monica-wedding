@@ -377,3 +377,63 @@ fieldset { border: 0; }
   .countdown > div { min-width: 61px; }
   .hero h1 { font-size: 52px; }
 }
+/* Floating Music Button */
+.floating-music {
+  position: fixed;
+  right: 22px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  width: 58px;
+  height: 58px;
+
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.95);
+  color: #8b6f47;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 26px;
+  cursor: pointer;
+
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+
+  z-index: 9999;
+
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  animation: musicPulse 2s infinite;
+}
+
+.floating-music:hover {
+  transform: translateY(-50%) scale(1.12);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.28);
+}
+
+@keyframes musicPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(139, 111, 71, 0.35);
+  }
+
+  70% {
+    box-shadow: 0 0 0 12px rgba(139, 111, 71, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(139, 111, 71, 0);
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .floating-music {
+    right: 12px;
+    width: 50px;
+    height: 50px;
+    font-size: 22px;
+  }
+}
