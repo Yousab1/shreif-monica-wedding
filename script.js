@@ -152,6 +152,61 @@ musicBtn.addEventListener("click", async () => {
 
 
 // =========================================
+// WEDDING DECORATION
+// =========================================
+
+const weddingConfetti =
+  document.getElementById("weddingConfetti");
+
+const decorations = [
+  "♡",
+  "✦",
+  "✧",
+  "♡",
+  "•",
+  "✦",
+  "♡",
+  "✧"
+];
+
+for (let i = 0; i < 55; i++) {
+
+  const piece = document.createElement("span");
+
+  piece.textContent =
+    decorations[
+    Math.floor(Math.random() * decorations.length)
+    ];
+
+  const angle =
+    Math.random() * Math.PI * 2;
+
+  const distance =
+    180 + Math.random() * 420;
+
+  const x =
+    Math.cos(angle) * distance;
+
+  const y =
+    Math.sin(angle) * distance;
+
+  piece.style.setProperty(
+    "--x",
+    `${x}px`
+  );
+
+  piece.style.setProperty(
+    "--y",
+    `${y}px`
+  );
+
+  piece.style.animationDelay =
+    `${Math.random() * .35}s`;
+
+  weddingConfetti.appendChild(piece);
+}
+
+// =========================================
 // WEDDING ENVELOPE OPENING
 // =========================================
 
@@ -171,6 +226,9 @@ envelope.addEventListener("click", async () => {
 
   // Open envelope
   weddingOpening.classList.add("play");
+
+  // show envelope
+  weddingConfetti.classList.add("show");
 
   // Start music from the same click
   try {
