@@ -121,14 +121,17 @@ const musicBtn = document.getElementById("musicBtn");
 const audio = document.getElementById("weddingAudio");
 
 // Try to start music automatically
-window.addEventListener("load", async () => {
+async function startWeddingMusic() {
   try {
     await audio.play();
     musicBtn.textContent = "❚❚";
   } catch (error) {
-    // Browser blocked autoplay
     console.log("Autoplay was blocked by the browser.");
   }
+}
+
+window.addEventListener("load", () => {
+  startWeddingMusic();
 });
 
 // Music button
@@ -155,21 +158,36 @@ musicBtn.addEventListener("click", async () => {
 const weddingOpening =
   document.getElementById("weddingOpening");
 
-window.addEventListener("load", () => {
+const envelope =
+  document.querySelector(".envelope");
 
-  // Start opening animation
-  setTimeout(() => {
-    weddingOpening.classList.add("play");
-  }, 500);
+let openingStarted = false;
 
-  // Hide the opening
+envelope.addEventListener("click", async () => {
+
+  if (openingStarted) return;
+
+  openingStarted = true;
+
+  // Open envelope
+  weddingOpening.classList.add("play");
+
+  // Start music from the same click
+  try {
+    await audio.play();
+    musicBtn.textContent = "❚❚";
+  } catch (error) {
+    console.log("Music could not start.");
+  }
+
+  // Hide opening
   setTimeout(() => {
     weddingOpening.classList.add("hide");
-  }, 4800);
+  }, 4300);
 
-  // Remove it completely
+  // Remove opening completely
   setTimeout(() => {
     weddingOpening.remove();
-  }, 6000);
+  }, 5500);
 
 });

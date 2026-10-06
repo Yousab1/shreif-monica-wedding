@@ -1065,3 +1065,46 @@ fieldset { border: 0; }
     height: 48px;
   }
 }
+
+/* =========================================
+   ENVELOPE SEAL ATTENTION VIBRATION
+========================================= */
+
+.envelope-seal {
+  animation: sealVibration 2.2s ease-in-out infinite;
+}
+
+@keyframes sealVibration {
+
+  0%,
+  72%,
+  100% {
+    margin-left: 0;
+  }
+
+  74% {
+    margin-left: -4px;
+  }
+
+  76% {
+    margin-left: 4px;
+  }
+
+  78% {
+    margin-left: -3px;
+  }
+
+  80% {
+    margin-left: 3px;
+  }
+
+  82% {
+    margin-left: 0;
+  }
+}
+
+/* Stop vibration when envelope opens */
+
+.wedding-opening.play .envelope-seal {
+  animation: none;
+}
