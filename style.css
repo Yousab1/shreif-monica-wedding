@@ -377,6 +377,66 @@ fieldset { border: 0; }
   .countdown > div { min-width: 61px; }
   .hero h1 { font-size: 52px; }
 }
+/* Language Button */
+.language-btn {
+  border: 1px solid rgba(139, 111, 71, 0.5);
+  background: transparent;
+  color: #8b6f47;
+  padding: 7px 14px;
+  border-radius: 20px;
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.language-btn:hover {
+  background: #8b6f47;
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .language-btn {
+    margin-left: auto;
+    margin-right: 10px;
+  }
+
+  .site-header {
+    display: flex;
+    align-items: center;
+  }
+}
+/* Language Button */
+.language-btn {
+  border: 1px solid rgba(139, 111, 71, 0.5);
+  background: transparent;
+  color: #8b6f47;
+  padding: 7px 14px;
+  border-radius: 20px;
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.language-btn:hover {
+  background: #8b6f47;
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .language-btn {
+    margin-left: auto;
+    margin-right: 10px;
+  }
+
+  .site-header {
+    display: flex;
+    align-items: center;
+  }
+}
 /* Floating Music Button */
 .floating-music {
   position: fixed;
@@ -384,10 +444,10 @@ fieldset { border: 0; }
   top: 50%;
   transform: translateY(-50%);
 
-  width: 58px;
-  height: 58px;
+  width: 56px;
+  height: 56px;
 
-  border: 2px solid rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.7);
   border-radius: 50%;
 
   background: rgba(255, 255, 255, 0.95);
@@ -397,43 +457,611 @@ fieldset { border: 0; }
   align-items: center;
   justify-content: center;
 
-  font-size: 26px;
+  font-size: 25px;
   cursor: pointer;
 
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
 
   z-index: 9999;
 
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-
-  animation: musicPulse 2s infinite;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .floating-music:hover {
-  transform: translateY(-50%) scale(1.12);
-  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.28);
-}
-
-@keyframes musicPulse {
-  0% {
-    box-shadow: 0 0 0 0 rgba(139, 111, 71, 0.35);
-  }
-
-  70% {
-    box-shadow: 0 0 0 12px rgba(139, 111, 71, 0);
-  }
-
-  100% {
-    box-shadow: 0 0 0 0 rgba(139, 111, 71, 0);
-  }
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
 }
 
 /* Mobile */
 @media (max-width: 768px) {
   .floating-music {
     right: 12px;
-    width: 50px;
-    height: 50px;
-    font-size: 22px;
+    width: 48px;
+    height: 48px;
+    font-size: 21px;
+  }
+}
+/* =========================================
+   ELEGANT WEDDING ENVELOPE OPENING
+========================================= */
+
+.wedding-opening {
+  position: fixed;
+  inset: 0;
+
+  width: 100%;
+  height: 100dvh;
+
+  z-index: 999999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 50% 45%,
+      #fffefa 0%,
+      #faf5ed 45%,
+      #f1e7da 100%
+    );
+
+  transition:
+    opacity 1.2s ease,
+    visibility 1.2s ease;
+}
+
+
+/* =========================================
+   SCENE
+========================================= */
+
+.envelope-scene {
+  position: relative;
+
+  width: min(760px, 94vw);
+  height: min(650px, 82dvh);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  perspective: 1600px;
+}
+
+
+/* =========================================
+   ENVELOPE
+========================================= */
+
+.envelope {
+  position: absolute;
+
+  width: min(650px, 88vw);
+  aspect-ratio: 1.72 / 1;
+
+  bottom: 7%;
+
+  transform-style: preserve-3d;
+
+  z-index: 4;
+}
+
+
+/* Main envelope */
+
+.envelope-back {
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      135deg,
+      #fffdf8,
+      #f4eadc
+    );
+
+  border: 1px solid rgba(151, 119, 72, .35);
+
+  border-radius: 3px;
+
+  box-shadow:
+    0 25px 60px rgba(91, 67, 42, .13);
+}
+
+
+/* Gold inner border */
+
+.envelope-back::before {
+  content: "";
+
+  position: absolute;
+  inset: 13px;
+
+  border: 1px solid rgba(151, 119, 72, .38);
+}
+
+
+/* Envelope pocket */
+
+.envelope-pocket {
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      145deg,
+      #fffaf2,
+      #eadbc8
+    );
+
+  clip-path:
+    polygon(
+      0 0,
+      50% 57%,
+      100% 0,
+      100% 100%,
+      0 100%
+    );
+
+  z-index: 3;
+
+  border-radius: 3px;
+}
+
+
+/* Envelope flap */
+
+.envelope-flap {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 72%;
+
+  background:
+    linear-gradient(
+      145deg,
+      #fffdf8,
+      #eee0ce
+    );
+
+  clip-path:
+    polygon(
+      0 0,
+      100% 0,
+      50% 79%
+    );
+
+  transform-origin: top center;
+
+  transform: rotateX(0deg);
+
+  backface-visibility: hidden;
+
+  border-top: 1px solid rgba(151, 119, 72, .3);
+
+  z-index: 6;
+
+  transition:
+    transform 1.5s cubic-bezier(.65,.05,.36,1);
+}
+
+
+/* Gold line */
+
+.envelope-flap::after {
+  content: "";
+
+  position: absolute;
+
+  left: 50%;
+  bottom: 8%;
+
+  width: 42%;
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(151,119,72,.6),
+      transparent
+    );
+
+  transform: translateX(-50%);
+}
+
+
+/* =========================================
+   SEAL
+========================================= */
+
+.envelope-seal {
+  position: absolute;
+
+  left: 50%;
+  top: 55%;
+
+  width: 76px;
+  height: 76px;
+
+  transform:
+    translate(-50%, -50%);
+
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #fffdf8;
+
+  color: #96764a;
+
+  font-family:
+    "Cormorant Garamond",
+    serif;
+
+  font-size: 25px;
+
+  border:
+    1px solid rgba(151,119,72,.7);
+
+  box-shadow:
+    0 5px 18px rgba(91,67,42,.12);
+
+  z-index: 10;
+
+  transition:
+    opacity .5s ease,
+    transform .7s ease;
+}
+
+
+/* Inner seal */
+
+.envelope-seal::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 6px;
+
+  border:
+    1px solid rgba(151,119,72,.3);
+
+  border-radius: 50%;
+}
+
+
+/* =========================================
+   INVITATION CARD
+========================================= */
+
+.invitation-card {
+  position: absolute;
+
+  width: min(430px, 61vw);
+
+  aspect-ratio: .70 / 1;
+
+  bottom: 10%;
+
+  background: #fffefa;
+
+  border:
+    1px solid rgba(151,119,72,.45);
+
+  box-shadow:
+    0 20px 50px rgba(70,50,30,.14);
+
+  z-index: 2;
+
+  opacity: 0;
+
+  transform:
+    translateY(18%)
+    scale(.94);
+
+  transition:
+    transform 1.7s cubic-bezier(.2,.8,.2,1),
+    opacity .8s ease;
+
+  overflow: hidden;
+}
+
+
+/* Card frame */
+
+.invitation-card::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 14px;
+
+  border:
+    1px solid rgba(151,119,72,.4);
+
+  pointer-events: none;
+}
+
+
+/* Card content */
+
+.invitation-inner {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  padding: 35px;
+}
+
+
+.invitation-small {
+  font-family: "Montserrat", sans-serif;
+
+  font-size: 10px;
+
+  letter-spacing: 4px;
+
+  color: #96764a;
+
+  margin-bottom: 27px;
+}
+
+
+.invitation-card h1 {
+  margin: 0;
+
+  font-family:
+    "Cormorant Garamond",
+    serif;
+
+  font-size: clamp(45px, 6vw, 70px);
+
+  font-weight: 500;
+
+  line-height: .8;
+
+  letter-spacing: 4px;
+
+  color: #403a34;
+}
+
+
+.invitation-card h1 span {
+  display: block;
+
+  margin: 10px 0;
+
+  font-size: .55em;
+
+  color: #96764a;
+}
+
+
+.invitation-divider {
+  display: flex;
+
+  align-items: center;
+
+  gap: 13px;
+
+  margin: 31px 0 20px;
+}
+
+
+.invitation-divider i {
+  width: 45px;
+
+  height: 1px;
+
+  background:
+    rgba(151,119,72,.5);
+}
+
+
+.invitation-divider span {
+  color: #96764a;
+
+  font-size: 15px;
+}
+
+
+.invitation-card p {
+  margin: 0 0 15px;
+
+  font-family:
+    "Montserrat",
+    sans-serif;
+
+  font-size: 9px;
+
+  letter-spacing: 3px;
+
+  color: #96764a;
+}
+
+
+.invitation-card strong {
+  font-family:
+    "Montserrat",
+    sans-serif;
+
+  font-size: 12px;
+
+  letter-spacing: 4px;
+
+  color: #403a34;
+}
+
+
+/* =========================================
+   OPEN ANIMATION
+========================================= */
+
+.wedding-opening.play .envelope-flap {
+  transform:
+    rotateX(-180deg);
+}
+
+
+.wedding-opening.play .envelope-seal {
+  opacity: 0;
+
+  transform:
+    translate(-50%, -50%)
+    scale(1.35);
+}
+
+
+.wedding-opening.play .invitation-card {
+  opacity: 1;
+
+  transform:
+    translateY(-27%)
+    scale(1);
+}
+
+
+/* =========================================
+   EXIT
+========================================= */
+
+.wedding-opening.hide {
+  opacity: 0;
+
+  visibility: hidden;
+
+  pointer-events: none;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 768px) {
+
+  .envelope-scene {
+    width: 100vw;
+    height: 78dvh;
+  }
+
+  .envelope {
+    width: 91vw;
+    bottom: 7%;
+  }
+
+  .envelope-back::before {
+    inset: 9px;
+  }
+
+  .invitation-card {
+    width: 58vw;
+    bottom: 11%;
+  }
+
+  .invitation-inner {
+    padding: 24px;
+  }
+
+  .invitation-small {
+    font-size: 7px;
+    letter-spacing: 2.5px;
+    margin-bottom: 19px;
+  }
+
+  .invitation-card h1 {
+    font-size: 38px;
+    letter-spacing: 2px;
+  }
+
+  .invitation-card h1 span {
+    margin: 7px 0;
+  }
+
+  .invitation-divider {
+    margin: 22px 0 15px;
+  }
+
+  .invitation-divider i {
+    width: 27px;
+  }
+
+  .invitation-card p {
+    font-size: 7px;
+    letter-spacing: 1.8px;
+  }
+
+  .invitation-card strong {
+    font-size: 9px;
+    letter-spacing: 2.5px;
+  }
+
+  .envelope-seal {
+    width: 54px;
+    height: 54px;
+    font-size: 20px;
+  }
+
+  .envelope::before,
+  .envelope::after {
+    font-size: 25px;
+  }
+
+  .envelope::before {
+    left: 15px;
+    bottom: 13px;
+  }
+
+  .envelope::after {
+    right: 15px;
+    bottom: 13px;
+  }
+}
+
+
+/* =========================================
+   VERY SMALL PHONES
+========================================= */
+
+@media (max-width: 380px) {
+
+  .envelope-scene {
+    height: 75dvh;
+  }
+
+  .envelope {
+    width: 94vw;
+  }
+
+  .invitation-card {
+    width: 61vw;
+  }
+
+  .invitation-card h1 {
+    font-size: 34px;
+  }
+
+  .envelope-seal {
+    width: 48px;
+    height: 48px;
   }
 }

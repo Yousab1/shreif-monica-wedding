@@ -120,6 +120,18 @@ rsvpForm.addEventListener("submit", async (event) => {
 const musicBtn = document.getElementById("musicBtn");
 const audio = document.getElementById("weddingAudio");
 
+// Try to start music automatically
+window.addEventListener("load", async () => {
+  try {
+    await audio.play();
+    musicBtn.textContent = "❚❚";
+  } catch (error) {
+    // Browser blocked autoplay
+    console.log("Autoplay was blocked by the browser.");
+  }
+});
+
+// Music button
 musicBtn.addEventListener("click", async () => {
   if (!audio.querySelector("source")) {
     alert("Add your wedding song in index.html first.");
@@ -133,4 +145,31 @@ musicBtn.addEventListener("click", async () => {
     audio.pause();
     musicBtn.textContent = "♫";
   }
+});
+
+
+// =========================================
+// WEDDING ENVELOPE OPENING
+// =========================================
+
+const weddingOpening =
+  document.getElementById("weddingOpening");
+
+window.addEventListener("load", () => {
+
+  // Start opening animation
+  setTimeout(() => {
+    weddingOpening.classList.add("play");
+  }, 500);
+
+  // Hide the opening
+  setTimeout(() => {
+    weddingOpening.classList.add("hide");
+  }, 4800);
+
+  // Remove it completely
+  setTimeout(() => {
+    weddingOpening.remove();
+  }, 6000);
+
 });
