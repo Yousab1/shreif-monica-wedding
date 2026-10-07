@@ -241,11 +241,11 @@ envelope.addEventListener("click", async () => {
   // Hide opening
   setTimeout(() => {
     weddingOpening.classList.add("hide");
-  }, 4300);
+  }, 2000);
 
   // Remove opening completely
   setTimeout(() => {
     weddingOpening.remove();
-  }, 5500);
+  }, 5000);
 
 });
