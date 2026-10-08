@@ -370,11 +370,30 @@ h3 {
   font-size: 38px;
 }
 
+/* =========================================
+   TIMELINE STYLES & ALL-DEVICES MARQUEE
+========================================= */
+
 .timeline {
   margin-top: 75px;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  padding: 10px 0;
+}
+
+.timeline-track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  animation: timelineMarquee 30s linear infinite;
+}
+
+.timeline-track:hover {
+  animation-play-state: paused;
 }
 
 .timeline-item {
@@ -382,7 +401,8 @@ h3 {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  min-width: 125px;
+  min-width: 160px;
+  flex-shrink: 0;
 }
 
 .timeline-item span {
@@ -408,6 +428,17 @@ h3 {
   width: 65px;
   background: var(--gold);
   opacity: .6;
+  flex-shrink: 0;
+}
+
+/* حركة التايملاين التلقائية لجميع الشاشات */
+@keyframes timelineMarquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 .details {
@@ -507,7 +538,6 @@ h3 {
   width: max-content;
   position: relative;
   transform: none;
-  /* إزالة الميلة */
   animation: memoriesMarquee 45s linear infinite;
 }
 
@@ -951,18 +981,12 @@ fieldset {
     order: 3;
   }
 
-  .timeline {
-    overflow-x: auto;
-    justify-content: flex-start;
-    padding-bottom: 15px;
-  }
-
   .timeline-item {
     min-width: 120px;
   }
 
   .timeline-line {
-    min-width: 35px;
+    width: 35px;
   }
 
   .details {
