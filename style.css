@@ -903,7 +903,7 @@ fieldset {
     box-shadow: var(--shadow);
   }
 
-  .nav.open {
+  .nav.active {
     display: flex;
   }
 
@@ -1701,77 +1701,45 @@ fieldset {
   animation: none;
 }
 
+/* =========================================
+   WEDDING CONFETTI / FALLING PARTICLES FIX
+========================================= */
+
 .wedding-confetti {
   position: absolute;
   inset: 0;
-
   pointer-events: none;
   overflow: hidden;
-
-  z-index: 50;
-
-  opacity: 0;
+  z-index: 10;
 }
 
-.wedding-confetti.show {
-  opacity: 1;
+.wedding-confetti span,
+.falling-particle {
+  position: fixed;
+  top: -20px;
+  left: var(--x, 50vw);
+  font-size: 16px;
+  color: var(--gold);
+  opacity: 0.8;
+  animation: fallConfetti var(--duration, 5s) linear infinite;
+  animation-delay: var(--delay, 0s);
+  pointer-events: none;
+  z-index: 9999;
 }
 
-.wedding-confetti span {
-  position: absolute;
-
-  left: 50%;
-  top: 50%;
-
-  font-family: Arial, sans-serif;
-  font-size: 20px;
-
-  color: #c49a52;
-
-  opacity: 0;
-
-  animation:
-    weddingBurst 5s ease-out forwards;
-}
-
-.wedding-confettiب span:nth-child(3n) {
-  font-size: 25px;
-}
-
-.wedding-confetti span:nth-child(4n) {
-  font-size: 14px;
-}
-
-.wedding-confetti span:nth-child(5n) {
-  font-size: 30px;
-}
-
-@keyframes weddingBurst {
-
+@keyframes fallConfetti {
   0% {
-    transform:
-      translate(-50%, -50%) scale(.2) rotate(0deg);
-
+    transform: translateY(-20px) rotate(0deg);
     opacity: 0;
   }
-
-  12% {
+  10% {
     opacity: 1;
   }
-
-  75% {
-    opacity: 1;
-  }
-
   90% {
-    opacity: .7;
+    opacity: 1;
   }
-
   100% {
-    transform:
-      translate(calc(-50% + var(--x)),
-        calc(-50% + var(--y))) scale(.8) rotate(360deg);
-
+    transform: translateY(105vh) rotate(360deg);
     opacity: 0;
   }
 }

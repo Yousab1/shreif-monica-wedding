@@ -78,33 +78,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   // =========================================
-  // 3. RSVP GUEST COUNTER
-  // =========================================
+// 3. RSVP GUEST COUNTER (Fixed)
+// =========================================
 
-  const guestsInput = document.getElementById("guests");
-  const guestMinus = document.getElementById("guestMinus");
-  const guestPlus = document.getElementById("guestPlus");
+const guestsInput = document.getElementById("guests");
+const guestMinus = document.getElementById("guestMinus") || document.querySelector('[data-action="minus"]');
+const guestPlus = document.getElementById("guestPlus") || document.querySelector('[data-action="plus"]');
 
-  if (guestsInput && guestMinus && guestPlus) {
-    guestMinus.addEventListener("click", () => {
-      const currentValue = Number(guestsInput.value) || 1;
+if (guestsInput && guestMinus && guestPlus) {
+  guestMinus.addEventListener("click", () => {
+    const currentValue = Number(guestsInput.value) || 1;
+    const minGuests = Number(guestsInput.min) || 1;
 
-      if (currentValue > 1) {
-        guestsInput.value = currentValue - 1;
-      }
-    });
+    if (currentValue > minGuests) {
+      guestsInput.value = currentValue - 1;
+    }
+  });
 
-    guestPlus.addEventListener("click", () => {
-      const currentValue = Number(guestsInput.value) || 1;
-      const maxGuests = Number(guestsInput.max) || 10;
+  guestPlus.addEventListener("click", () => {
+    const currentValue = Number(guestsInput.value) || 1;
+    const maxGuests = Number(guestsInput.max) || 10;
 
-      if (currentValue < maxGuests) {
-        guestsInput.value = currentValue + 1;
-      }
-    });
-  }
-
-
+    if (currentValue < maxGuests) {
+      guestsInput.value = currentValue + 1;
+    }
+  });
+}
   // =========================================
   // 4. RSVP FORM + GOOGLE SHEETS
   // =========================================
@@ -456,7 +455,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       if (giftbookName) {
-        giftbookName.textContent = `With love, ${currentMessage.name} ♡`;
+        giftbookName.textContent = ` ${currentMessage.name} ♡`;
       }
 
       if (giftbookPageCount) {
