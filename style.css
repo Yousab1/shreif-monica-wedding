@@ -436,6 +436,7 @@ h3 {
   0% {
     transform: translateX(0);
   }
+
   100% {
     transform: translateX(-50%);
   }
@@ -1733,7 +1734,7 @@ fieldset {
     weddingBurst 5s ease-out forwards;
 }
 
-.wedding-confetti span:nth-child(3n) {
+.wedding-confettiب span:nth-child(3n) {
   font-size: 25px;
 }
 
@@ -1778,4 +1779,572 @@ fieldset {
 .footer a {
   text-decoration: underline;
   text-underline-offset: 3px;
+}
+
+.details-image img {
+  height: 100%;
+  object-fit: cover;
+  min-height: 480px;
+
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%),
+    linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%),
+    linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+  mask-composite: intersect;
+}
+
+/* =========================================
+   FALLING DECORATIONS (SCROLL SNOW/RAIN EFFECT)
+========================================= */
+.falling-particle {
+  position: fixed;
+  top: -50px;
+  z-index: 9999;
+  user-select: none;
+  pointer-events: none;
+  animation: fallDown linear forwards;
+  opacity: 0.85;
+}
+
+@keyframes fallDown {
+  0% {
+    transform: translateY(0) rotate(0deg) scale(0.8);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(105vh) rotate(360deg) scale(1.2);
+    opacity: 0;
+  }
+}
+
+
+/* =========================================
+   SHREIF & MONICA — GIFT BOOK
+========================================= */
+
+.giftbook-section {
+  background:
+    radial-gradient(ellipse at top, rgba(255, 253, 249, 0.95), transparent 65%),
+    var(--ivory);
+  text-align: center;
+  overflow: hidden;
+}
+
+.giftbook-heading {
+  max-width: 680px;
+  margin: 0 auto 42px;
+}
+
+.giftbook-heading h2 {
+  margin: 8px 0 18px;
+}
+
+.giftbook-intro {
+  max-width: 520px;
+  margin: 0 auto;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.9;
+}
+
+.giftbook-book {
+  width: min(680px, 100%);
+  margin: 0 auto;
+  padding: 18px;
+  background: linear-gradient(135deg, #e8d7bd, #c9a875, #eadbc5);
+  border: 1px solid rgba(159, 123, 62, 0.45);
+  border-radius: 5px;
+  box-shadow:
+    0 25px 65px rgba(59, 45, 39, 0.13),
+    inset 0 0 0 3px rgba(255, 253, 249, 0.45);
+  position: relative;
+}
+
+.giftbook-book::before {
+  content: "";
+  position: absolute;
+  inset: 7px;
+  border: 1px solid rgba(255, 253, 249, 0.65);
+  pointer-events: none;
+}
+
+.giftbook-topline {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  color: #fffdf9;
+  padding: 3px 0 17px;
+  font-family: var(--serif);
+  font-size: 18px;
+}
+
+.giftbook-topline-text {
+  font-family: var(--sans);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 3px;
+}
+
+.giftbook-page {
+  min-height: 390px;
+  padding: clamp(28px, 6vw, 52px);
+  background:
+    linear-gradient(rgba(255, 253, 249, 0.96), rgba(250, 247, 242, 0.97)),
+    var(--white);
+  border: 1px solid rgba(159, 123, 62, 0.35);
+  border-radius: 2px;
+  box-shadow: 0 5px 20px rgba(59, 45, 39, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.giftbook-page::before {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  border: 1px solid rgba(189, 150, 80, 0.28);
+  pointer-events: none;
+}
+
+.giftbook-dear {
+  position: relative;
+  color: var(--gold-dark);
+  font-family: var(--serif);
+  font-size: clamp(27px, 4vw, 39px);
+  font-style: italic;
+  line-height: 1.2;
+}
+
+.giftbook-divider {
+  width: min(230px, 80%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  margin: 22px 0 26px;
+  color: var(--gold);
+}
+
+.giftbook-divider::before,
+.giftbook-divider::after {
+  content: "";
+  height: 1px;
+  flex: 1;
+  background: linear-gradient(90deg, transparent, var(--gold));
+}
+
+.giftbook-divider::after {
+  background: linear-gradient(90deg, var(--gold), transparent);
+}
+
+.giftbook-divider span {
+  font-size: 13px;
+}
+
+.giftbook-message-area {
+  width: 100%;
+  max-width: 460px;
+  min-height: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.giftbook-loading {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.8;
+  max-width: 330px;
+}
+
+.giftbook-entry {
+  width: 100%;
+  animation: giftbookFadeIn 0.4s ease both;
+}
+
+.giftbook-entry[hidden] {
+  display: none;
+}
+
+.giftbook-message {
+  color: var(--brown);
+  font-family: var(--serif);
+  font-size: clamp(19px, 3vw, 25px);
+  line-height: 1.75;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.giftbook-signature {
+  margin-top: 25px;
+  color: var(--gold-dark);
+  font-family: var(--serif);
+  font-size: 23px;
+  font-style: italic;
+  overflow-wrap: anywhere;
+}
+
+.giftbook-signature::before {
+  content: "With love, ";
+  font-size: 16px;
+  color: var(--muted);
+}
+
+.giftbook-bottom-ornament {
+  margin-top: 30px;
+  color: var(--gold);
+  font-size: 20px;
+  letter-spacing: 2px;
+}
+
+.giftbook-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 19px 5px 2px;
+  color: #fffdf9;
+}
+
+.giftbook-nav {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 38px;
+  padding: 8px 13px;
+  color: #fffdf9;
+  background: transparent;
+  border: 1px solid rgba(255, 253, 249, 0.65);
+  border-radius: 999px;
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: background 0.25s ease, color 0.25s ease, opacity 0.25s ease;
+}
+
+.giftbook-nav:hover:not(:disabled) {
+  background: #fffdf9;
+  color: var(--gold-dark);
+}
+
+.giftbook-nav:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.giftbook-page-count {
+  color: #fffdf9;
+  font-size: 10px;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+.giftbook-footnote {
+  margin-top: 28px;
+  color: var(--muted);
+  font-family: var(--serif);
+  font-size: 19px;
+  font-style: italic;
+}
+
+@keyframes giftbookFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 600px) {
+  .giftbook-section {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .giftbook-heading {
+    margin-bottom: 30px;
+  }
+
+  .giftbook-book {
+    padding: 12px;
+  }
+
+  .giftbook-page {
+    min-height: 350px;
+    padding: 30px 22px;
+  }
+
+  .giftbook-page::before {
+    inset: 8px;
+  }
+
+  .giftbook-topline {
+    gap: 10px;
+  }
+
+  .giftbook-topline-text {
+    font-size: 8px;
+    letter-spacing: 2px;
+  }
+
+  .giftbook-message-area {
+    min-height: 145px;
+  }
+
+  .giftbook-controls {
+    gap: 7px;
+  }
+
+  .giftbook-nav {
+    gap: 5px;
+    padding: 8px 10px;
+    font-size: 9px;
+  }
+
+  .giftbook-page-count {
+    font-size: 9px;
+    letter-spacing: 0;
+  }
+
+  .giftbook-footnote {
+    font-size: 17px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .giftbook-entry {
+    animation: none;
+  }
+
+  .giftbook-nav {
+    transition: none;
+  }
+}
+
+
+/* =========================================
+   SHREIF & MONICA — GIFT BOOK COVER
+========================================= */
+
+.giftbook-cover {
+  width: min(100%, 620px);
+  margin: 35px auto;
+  padding: 12px;
+  background: linear-gradient(135deg, #b18b4e, #ead8ae, #a77c3c);
+  border-radius: 4px;
+  box-shadow: 0 20px 50px rgba(80, 57, 31, 0.17);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+
+.giftbook-cover-inner {
+  position: relative;
+  min-height: 510px;
+  padding: 48px 24px 35px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  color: #745a3c;
+  background:
+    radial-gradient(ellipse at center, #fffdf8 0%, #f8f0df 100%);
+  border: 1px solid rgba(155, 115, 55, 0.65);
+  outline: 1px solid rgba(155, 115, 55, 0.4);
+  outline-offset: -9px;
+}
+
+.giftbook-cover-inner::before,
+.giftbook-cover-inner::after {
+  content: "❧";
+  position: absolute;
+  color: #b39159;
+  font-size: 38px;
+  opacity: 0.65;
+}
+
+.giftbook-cover-inner::before {
+  top: 22px;
+  left: 25px;
+  transform: rotate(-35deg);
+}
+
+.giftbook-cover-inner::after {
+  right: 25px;
+  bottom: 20px;
+  transform: rotate(145deg);
+}
+
+.giftbook-cover-top-ornament,
+.giftbook-cover-bottom-ornament {
+  color: #b18b4e;
+  font-size: 25px;
+}
+
+.giftbook-cover-eyebrow,
+.giftbook-cover-footer {
+  font-family: "Montserrat", sans-serif;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 4px;
+  color: #99794e;
+}
+
+.giftbook-cover-line {
+  position: relative;
+  width: 115px;
+  height: 1px;
+  margin: 25px 0;
+  background: #c4a66e;
+}
+
+.giftbook-cover-line span {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  padding: 0 10px;
+  color: #b18b4e;
+  background: #fbf6ea;
+  transform: translate(-50%, -50%);
+  font-size: 18px;
+}
+
+.giftbook-cover-names {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  margin: 0;
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(35px, 7vw, 49px);
+  font-weight: 500;
+  line-height: 0.98;
+  letter-spacing: 3px;
+  color: #74583a;
+}
+
+.giftbook-cover-names span {
+  margin: 7px 0;
+  font-size: 27px;
+  font-style: italic;
+  font-weight: 400;
+  color: #b18b4e;
+}
+
+.giftbook-cover-subtitle {
+  margin: 20px 0 0;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 26px;
+  font-style: italic;
+  color: #a18150;
+}
+
+.giftbook-cover-flower {
+  margin-top: 17px;
+  color: #b18b4e;
+  font-size: 21px;
+  letter-spacing: 5px;
+}
+
+.giftbook-cover-message {
+  margin: 15px 0 25px;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 18px;
+  line-height: 1.55;
+  color: #88745a;
+}
+
+.giftbook-open-btn {
+  padding: 13px 25px;
+  border: 1px solid #b18b4e;
+  background: transparent;
+  color: #80613d;
+  font-family: "Montserrat", sans-serif;
+  font-size: 11px;
+  letter-spacing: 1.4px;
+  cursor: pointer;
+  transition:
+    background 0.3s ease,
+    color 0.3s ease,
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.giftbook-open-btn span {
+  margin-left: 7px;
+  font-size: 14px;
+}
+
+.giftbook-open-btn:hover {
+  background: #b18b4e;
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 7px 18px rgba(113, 83, 42, 0.18);
+}
+
+.giftbook-cover-footer {
+  margin-top: 27px;
+  font-size: 8px;
+  letter-spacing: 3px;
+}
+
+/* Cover opening animation */
+
+.giftbook-cover.is-opening {
+  opacity: 0;
+  transform: translateY(-12px) scale(0.96);
+  pointer-events: none;
+}
+
+/* Smoothly reveal the book */
+
+.giftbook-content:not([hidden]) {
+  animation: giftbookOpenReveal 0.65s ease both;
+}
+
+@keyframes giftbookOpenReveal {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 600px) {
+  .giftbook-cover {
+    padding: 8px;
+  }
+
+  .giftbook-cover-inner {
+    min-height: 470px;
+    padding: 40px 18px 30px;
+  }
+
+  .giftbook-cover-names {
+    font-size: 39px;
+  }
+
+  .giftbook-cover-message {
+    font-size: 16px;
+  }
+
+  .giftbook-cover-eyebrow {
+    letter-spacing: 3px;
+  }
 }

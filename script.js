@@ -1,191 +1,597 @@
-// ===============================
-// SHREIF & MONICA WEDDING WEBSITE
-// ===============================
 
-// Wedding date: November 21, 2026.
-// Change the time below when you know the exact ceremony time.
-const weddingDate = new Date("2026-11-21T16:00:00+02:00");
+document.addEventListener("DOMContentLoaded", () => {
+  // =========================================
+  // 1. COUNTDOWN
+  // =========================================
 
-function updateCountdown() {
-  const now = new Date();
-  const diff = weddingDate - now;
+  const weddingDate = new Date("2026-11-21T16:00:00+02:00");
 
-  if (diff <= 0) {
-    document.getElementById("days").textContent = "00";
-    document.getElementById("hours").textContent = "00";
-    document.getElementById("minutes").textContent = "00";
-    document.getElementById("seconds").textContent = "00";
-    return;
+  const countdownDays = document.getElementById("days");
+  const countdownHours = document.getElementById("hours");
+  const countdownMinutes = document.getElementById("minutes");
+  const countdownSeconds = document.getElementById("seconds");
+
+  function updateCountdown() {
+    const now = new Date();
+    const difference = weddingDate.getTime() - now.getTime();
+
+    if (difference <= 0) {
+      if (countdownDays) countdownDays.textContent = "00";
+      if (countdownHours) countdownHours.textContent = "00";
+      if (countdownMinutes) countdownMinutes.textContent = "00";
+      if (countdownSeconds) countdownSeconds.textContent = "00";
+      return;
+    }
+
+    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+    const hours = Math.floor(
+      (difference / (1000 * 60 * 60)) % 24
+    );
+    const minutes = Math.floor(
+      (difference / (1000 * 60)) % 60
+    );
+    const seconds = Math.floor(
+      (difference / 1000) % 60
+    );
+
+    if (countdownDays) {
+      countdownDays.textContent = String(days).padStart(2, "0");
+    }
+
+    if (countdownHours) {
+      countdownHours.textContent = String(hours).padStart(2, "0");
+    }
+
+    if (countdownMinutes) {
+      countdownMinutes.textContent = String(minutes).padStart(2, "0");
+    }
+
+    if (countdownSeconds) {
+      countdownSeconds.textContent = String(seconds).padStart(2, "0");
+    }
   }
 
-  const seconds = Math.floor(diff / 1000);
-  const days = Math.floor(seconds / 86400);
-  const hours = Math.floor((seconds % 86400) / 3600);
-  const minutes = Math.floor((seconds % 3600) / 60);
-  const secs = seconds % 60;
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
 
-  document.getElementById("days").textContent = String(days).padStart(2, "0");
-  document.getElementById("hours").textContent = String(hours).padStart(2, "0");
-  document.getElementById("minutes").textContent = String(minutes).padStart(2, "0");
-  document.getElementById("seconds").textContent = String(secs).padStart(2, "0");
-}
 
-updateCountdown();
-setInterval(updateCountdown, 1000);
+  // =========================================
+  // 2. MOBILE NAVIGATION
+  // =========================================
 
-// Mobile navigation
-const menuToggle = document.getElementById("menuToggle");
-const nav = document.getElementById("nav");
+  const menuToggle = document.getElementById("menuToggle");
+  const nav = document.getElementById("nav");
 
-menuToggle.addEventListener("click", () => {
-  const isOpen = nav.classList.toggle("open");
-  menuToggle.setAttribute("aria-expanded", String(isOpen));
-});
-
-document.querySelectorAll(".nav a").forEach(link => {
-  link.addEventListener("click", () => nav.classList.remove("open"));
-});
-
-// RSVP guest stepper
-const guestsInput = document.getElementById("guests");
-
-document.querySelectorAll(".stepper button").forEach(button => {
-  button.addEventListener("click", () => {
-    let value = Number(guestsInput.value);
-
-    if (button.dataset.action === "plus") value = Math.min(value + 1, 10);
-    if (button.dataset.action === "minus") value = Math.max(value - 1, 1);
-
-    guestsInput.value = value;
-  });
-});
-
-// ===============================
-// GOOGLE SHEETS CONNECTION
-// ===============================
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzpkhXDdLhwzNzQhX7_eR67bUi6k9pHI5-5uXf5plNX1O0HHfv1RSv3g1NUf4SNaaZM/exec";
-const rsvpForm = document.getElementById("rsvpForm");
-const formStatus = document.getElementById("formStatus");
-
-rsvpForm.addEventListener("submit", async (event) => {
-  event.preventDefault();
-
-  if (!GOOGLE_SCRIPT_URL) {
-    formStatus.textContent = "Demo mode: add your Google Apps Script URL in script.js to enable RSVP submission.";
-    return;
-  }
-
-  const submitButton = rsvpForm.querySelector(".submit-btn");
-  submitButton.disabled = true;
-  submitButton.textContent = "SENDING...";
-
-  const formData = new FormData(rsvpForm);
-
-  const data = {
-    name: formData.get("name"),
-    attendance: formData.get("attendance"),
-    guests: formData.get("guests"),
-    message: formData.get("message")
-  };
-
-  try {
-    await fetch(GOOGLE_SCRIPT_URL, {
-      method: "POST",
-      mode: "no-cors",
-      headers: {
-        "Content-Type": "text/plain;charset=utf-8"
-      },
-      body: JSON.stringify(data)
+  if (menuToggle && nav) {
+    menuToggle.addEventListener("click", () => {
+      nav.classList.toggle("active");
+      menuToggle.classList.toggle("active");
     });
 
-    formStatus.textContent = "Thank you! Your RSVP has been received. ♡";
-    rsvpForm.reset();
-    guestsInput.value = 1;
-  } catch (error) {
-    formStatus.textContent = "Something went wrong. Please try again or contact the couple.";
-    console.error(error);
-  } finally {
-    submitButton.disabled = false;
-    submitButton.innerHTML = "SEND RSVP <span>➤</span>";
-  }
-});
-
-// Music button
-const musicBtn = document.getElementById("musicBtn");
-const audio = document.getElementById("weddingAudio");
-
-musicBtn.addEventListener("click", async () => {
-  if (!audio.querySelector("source")) {
-    alert("Add your wedding song in index.html first.");
-    return;
+    nav.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        nav.classList.remove("active");
+        menuToggle.classList.remove("active");
+      });
+    });
   }
 
-  if (audio.paused) {
-    await audio.play();
-    musicBtn.textContent = "❚❚";
-  } else {
-    audio.pause();
-    musicBtn.textContent = "♫";
-  }
-});
 
-// =========================================
-// WEDDING DECORATION
-// =========================================
-const weddingConfetti = document.getElementById("weddingConfetti");
-const decorations = ["♡", "✦", "✧", "♡", "•", "✦", "♡", "✧"];
+  // =========================================
+  // 3. RSVP GUEST COUNTER
+  // =========================================
 
-for (let i = 0; i < 55; i++) {
-  const piece = document.createElement("span");
+  const guestsInput = document.getElementById("guests");
+  const guestMinus = document.getElementById("guestMinus");
+  const guestPlus = document.getElementById("guestPlus");
 
-  piece.textContent = decorations[Math.floor(Math.random() * decorations.length)];
+  if (guestsInput && guestMinus && guestPlus) {
+    guestMinus.addEventListener("click", () => {
+      const currentValue = Number(guestsInput.value) || 1;
 
-  const angle = Math.random() * Math.PI * 2;
-  const distance = 180 + Math.random() * 420;
-  const x = Math.cos(angle) * distance;
-  const y = Math.sin(angle) * distance;
+      if (currentValue > 1) {
+        guestsInput.value = currentValue - 1;
+      }
+    });
 
-  piece.style.setProperty("--x", `${x}px`);
-  piece.style.setProperty("--y", `${y}px`);
-  piece.style.animationDelay = `${Math.random() * 0.35}s`;
+    guestPlus.addEventListener("click", () => {
+      const currentValue = Number(guestsInput.value) || 1;
+      const maxGuests = Number(guestsInput.max) || 10;
 
-  weddingConfetti.appendChild(piece);
-}
-
-// =========================================
-// WEDDING ENVELOPE OPENING
-// =========================================
-const weddingOpening = document.getElementById("weddingOpening");
-const envelope = document.querySelector(".envelope");
-
-let openingStarted = false;
-
-envelope.addEventListener("click", async () => {
-  if (openingStarted) return;
-
-  openingStarted = true;
-
-  // Open envelope
-  weddingOpening.classList.add("play");
-
-  // Show confetti
-  weddingConfetti.classList.add("show");
-
-  // Start music from the same click
-  try {
-    await audio.play();
-    musicBtn.textContent = "❚❚";
-  } catch (error) {
-    console.log("Music could not start.");
+      if (currentValue < maxGuests) {
+        guestsInput.value = currentValue + 1;
+      }
+    });
   }
 
-  // Hide opening
-  setTimeout(() => {
-    weddingOpening.classList.add("hide");
-  }, 2000);
 
-  // Remove opening completely
-  setTimeout(() => {
-    weddingOpening.remove();
-  }, 5000);
+  // =========================================
+  // 4. RSVP FORM + GOOGLE SHEETS
+  // =========================================
+
+  const GOOGLE_SCRIPT_URL =
+    "https://script.google.com/macros/s/AKfycbzpkhXDdLhwzNzQhX7_eR67bUi6k9pHI5-5uXf5plNX1O0HHfv1RSv3g1NUf4SNaaZM/exec";
+
+  const rsvpForm = document.getElementById("rsvpForm");
+
+  if (rsvpForm) {
+    rsvpForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const submitButton = rsvpForm.querySelector(
+        'button[type="submit"]'
+      );
+
+      const nameInput = rsvpForm.querySelector('[name="name"]');
+      const attendanceInput = rsvpForm.querySelector(
+        '[name="attendance"]:checked'
+      );
+      const messageInput = rsvpForm.querySelector(
+        '[name="message"]'
+      );
+
+      const name = nameInput ? nameInput.value.trim() : "";
+      const attendance = attendanceInput
+        ? attendanceInput.value
+        : "";
+      const guests = guestsInput
+        ? Number(guestsInput.value) || 1
+        : 1;
+      const message = messageInput
+        ? messageInput.value.trim()
+        : "";
+
+      if (!name) {
+        alert("Please enter your name.");
+        return;
+      }
+
+      if (!attendance) {
+        alert("Please select your attendance.");
+        return;
+      }
+
+      const data = {
+        name,
+        attendance,
+        guests,
+        message,
+      };
+
+      const originalButtonText = submitButton
+        ? submitButton.textContent
+        : "";
+
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = "Sending...";
+      }
+
+      try {
+        await fetch(GOOGLE_SCRIPT_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: {
+            "Content-Type": "text/plain;charset=utf-8",
+          },
+          body: JSON.stringify(data),
+        });
+
+        alert(
+          "Thank you! Your RSVP has been submitted. ♡"
+        );
+
+        rsvpForm.reset();
+
+        if (guestsInput) {
+          guestsInput.value = "1";
+        }
+      } catch (error) {
+        console.error("RSVP submission error:", error);
+
+        alert(
+          "Something went wrong. Please try again."
+        );
+      } finally {
+        if (submitButton) {
+          submitButton.disabled = false;
+          submitButton.textContent = originalButtonText;
+        }
+      }
+    });
+  }
+
+
+  // =========================================
+  // 5. BACKGROUND MUSIC
+  // =========================================
+
+  const musicBtn = document.getElementById("musicBtn");
+  const weddingAudio = document.getElementById("weddingAudio");
+
+  if (musicBtn && weddingAudio) {
+    musicBtn.addEventListener("click", async () => {
+      if (weddingAudio.paused) {
+        try {
+          await weddingAudio.play();
+          musicBtn.textContent = "❚❚";
+          musicBtn.setAttribute("aria-label", "Pause music");
+        } catch (error) {
+          console.error("Music playback error:", error);
+          alert("Unable to play the music. Please try again.");
+        }
+      } else {
+        weddingAudio.pause();
+        musicBtn.textContent = "♫";
+        musicBtn.setAttribute("aria-label", "Play music");
+      }
+    });
+
+    weddingAudio.addEventListener("ended", () => {
+      musicBtn.textContent = "♫";
+      musicBtn.setAttribute("aria-label", "Play music");
+    });
+  }
+
+
+  // =========================================
+  // 6. WEDDING CONFETTI
+  // =========================================
+
+  const confettiContainer = document.getElementById(
+    "weddingConfetti"
+  );
+
+  if (confettiContainer) {
+    for (let i = 0; i < 55; i++) {
+      const piece = document.createElement("span");
+
+      const x = Math.random() * window.innerWidth;
+      const delay = Math.random() * 5;
+      const duration = 4 + Math.random() * 5;
+
+      piece.style.setProperty("--x", `${x}px`);
+      piece.style.setProperty("--delay", `${delay}s`);
+      piece.style.setProperty("--duration", `${duration}s`);
+
+      confettiContainer.appendChild(piece);
+    }
+  }
+
+
+  // =========================================
+  // 7. FALLING PARTICLES
+  // =========================================
+
+  function createFallingParticle(burst = false) {
+    const particle = document.createElement("div");
+
+    particle.className = "falling-particle";
+    particle.textContent = Math.random() > 0.5 ? "♡" : "✦";
+
+    if (burst) {
+      // Random position across the screen for the opening burst
+      particle.style.left = `${10 + Math.random() * 80}%`;
+      particle.style.top = `${10 + Math.random() * 75}%`;
+      particle.style.animationDuration = `${1.5 + Math.random() * 2}s`;
+      particle.style.fontSize = `${18 + Math.random() * 22}px`;
+      particle.style.zIndex = "1000000";
+    } else {
+      // Keep the existing falling effect unchanged
+      particle.style.left = `${Math.random() * 100}%`;
+      particle.style.animationDuration = `${5 + Math.random() * 5}s`;
+    }
+
+    particle.style.opacity = `${0.3 + Math.random() * 0.5}`;
+
+    document.body.appendChild(particle);
+
+    setTimeout(() => {
+      particle.remove();
+    }, burst ? 4000 : 11000);
+  }
+
+  // Existing continuous falling decorations
+  setInterval(() => createFallingParticle(false), 400);
+
+
+  // =========================================
+  // 8. OPENING ENVELOPE
+  // =========================================
+
+  const weddingOpening = document.getElementById("weddingOpening");
+  const envelope = document.querySelector(".envelope");
+  const envelopeSeal = document.querySelector(".envelope-seal");
+
+  if (weddingOpening && envelope && envelopeSeal) {
+    envelopeSeal.addEventListener("click", async (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+
+      // Prevent opening the envelope more than once
+      if (weddingOpening.classList.contains("play")) {
+        return;
+      }
+
+      // Open the envelope
+      weddingOpening.classList.add("play");
+
+      // Show a random burst of decorations when the seal is clicked
+      for (let i = 0; i < 25; i++) {
+        setTimeout(() => {
+          createFallingParticle(true);
+        }, Math.random() * 500);
+      }
+
+
+      // Hide the envelope faster: 1.5 seconds
+      setTimeout(() => {
+        weddingOpening.classList.add("hide");
+      }, 1500);
+
+      // Start the wedding music
+      if (weddingAudio && weddingAudio.paused) {
+        try {
+          await weddingAudio.play();
+
+          if (musicBtn) {
+            musicBtn.textContent = "❚❚";
+            musicBtn.setAttribute("aria-label", "Pause music");
+          }
+        } catch (error) {
+          console.log("Music can be started using the music button.");
+        }
+      }
+    });
+  }
+
+
+  // =========================================
+  // GIFT BOOK COVER — OPEN BOOK
+  // =========================================
+
+  const giftbookCover = document.getElementById("giftbookCover");
+  const giftbookOpenBtn = document.getElementById("giftbookOpenBtn");
+  const giftbookContent = document.getElementById("giftbookContent");
+
+  if (giftbookCover && giftbookOpenBtn && giftbookContent) {
+    giftbookOpenBtn.addEventListener("click", () => {
+      giftbookOpenBtn.disabled = true;
+      giftbookCover.classList.add("is-opening");
+
+      setTimeout(() => {
+        giftbookCover.hidden = true;
+        giftbookContent.hidden = false;
+      }, 550);
+    });
+  }
+
+
+
+  // =========================================
+  // 9. GIFT BOOK — LOAD MESSAGES FROM GOOGLE SHEETS
+  // =========================================
+
+  const giftbookSection = document.getElementById("giftbook");
+
+  if (giftbookSection) {
+    const giftbookStatus = document.getElementById(
+      "giftbookStatus"
+    );
+
+    const giftbookEntry = document.getElementById(
+      "giftbookEntry"
+    );
+
+    const giftbookMessage = document.getElementById(
+      "giftbookMessage"
+    );
+
+    const giftbookName = document.getElementById(
+      "giftbookName"
+    );
+
+    const giftbookPrev = document.getElementById(
+      "giftbookPrev"
+    );
+
+    const giftbookNext = document.getElementById(
+      "giftbookNext"
+    );
+
+    const giftbookPageCount = document.getElementById(
+      "giftbookPageCount"
+    );
+
+    let giftMessages = [];
+    let currentGiftPage = 0;
+
+    function showGiftbookStatus(message) {
+      if (giftbookStatus) {
+        giftbookStatus.textContent = message;
+        giftbookStatus.hidden = false;
+      }
+
+      if (giftbookEntry) {
+        giftbookEntry.hidden = true;
+      }
+
+      if (giftbookPageCount) {
+        giftbookPageCount.textContent = "Page 0 of 0";
+      }
+
+      if (giftbookPrev) {
+        giftbookPrev.disabled = true;
+      }
+
+      if (giftbookNext) {
+        giftbookNext.disabled = true;
+      }
+    }
+
+    function renderGiftbookPage() {
+      if (!giftMessages.length) {
+        showGiftbookStatus(
+          "No wishes yet. Be the first to leave a message in the RSVP form. ♡"
+        );
+        return;
+      }
+
+      const currentMessage = giftMessages[currentGiftPage];
+
+      if (!currentMessage) {
+        return;
+      }
+
+      if (giftbookStatus) {
+        giftbookStatus.hidden = true;
+      }
+
+      if (giftbookEntry) {
+        giftbookEntry.hidden = false;
+      }
+
+      if (giftbookMessage) {
+        giftbookMessage.textContent = currentMessage.message;
+      }
+
+      if (giftbookName) {
+        giftbookName.textContent = `With love, ${currentMessage.name} ♡`;
+      }
+
+      if (giftbookPageCount) {
+        giftbookPageCount.textContent =
+          `Page ${currentGiftPage + 1} of ${giftMessages.length}`;
+      }
+
+      if (giftbookPrev) {
+        giftbookPrev.disabled = currentGiftPage === 0;
+      }
+
+      if (giftbookNext) {
+        giftbookNext.disabled =
+          currentGiftPage >= giftMessages.length - 1;
+      }
+    }
+
+    if (giftbookPrev) {
+      giftbookPrev.addEventListener("click", () => {
+        if (currentGiftPage > 0) {
+          currentGiftPage--;
+          renderGiftbookPage();
+        }
+      });
+    }
+
+    if (giftbookNext) {
+      giftbookNext.addEventListener("click", () => {
+        if (currentGiftPage < giftMessages.length - 1) {
+          currentGiftPage++;
+          renderGiftbookPage();
+        }
+      });
+    }
+
+    function loadGiftbookMessages() {
+      showGiftbookStatus("Loading your beautiful wishes...");
+
+      const callbackName =
+        "giftbookCallback_" +
+        Date.now() +
+        "_" +
+        Math.random().toString(36).slice(2);
+
+      const script = document.createElement("script");
+
+      let finished = false;
+
+      const cleanup = () => {
+        if (script.parentNode) {
+          script.parentNode.removeChild(script);
+        }
+
+        if (window[callbackName]) {
+          delete window[callbackName];
+        }
+
+        clearTimeout(timeoutId);
+      };
+
+      const timeoutId = setTimeout(() => {
+        if (finished) return;
+
+        finished = true;
+        cleanup();
+
+        showGiftbookStatus(
+          "We couldn't load the wishes right now. Please refresh the page and try again."
+        );
+      }, 15000);
+
+      window[callbackName] = (response) => {
+        if (finished) return;
+
+        finished = true;
+        cleanup();
+
+        if (!response || response.success !== true) {
+          console.error(
+            "Gift Book response error:",
+            response?.error || "Invalid response"
+          );
+
+          showGiftbookStatus(
+            "We couldn't load the wishes right now. Please try again later."
+          );
+
+          return;
+        }
+
+        giftMessages = Array.isArray(response.messages)
+          ? response.messages.filter((item) => {
+            return (
+              item &&
+              typeof item.name === "string" &&
+              item.name.trim() &&
+              typeof item.message === "string" &&
+              item.message.trim()
+            );
+          })
+          : [];
+
+        currentGiftPage = 0;
+
+        if (!giftMessages.length) {
+          showGiftbookStatus(
+            "No wishes yet. Be the first to leave a message in the RSVP form. ♡"
+          );
+          return;
+        }
+
+        renderGiftbookPage();
+      };
+
+      script.onerror = () => {
+        if (finished) return;
+
+        finished = true;
+        cleanup();
+
+        showGiftbookStatus(
+          "We couldn't connect to the Gift Book. Please refresh the page and try again."
+        );
+      };
+
+      script.src =
+        GOOGLE_SCRIPT_URL +
+        "?callback=" +
+        encodeURIComponent(callbackName) +
+        "&_=" +
+        Date.now();
+
+      document.head.appendChild(script);
+    }
+
+    loadGiftbookMessages();
+  }
 });
