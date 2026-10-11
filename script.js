@@ -78,32 +78,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   // =========================================
-// 3. RSVP GUEST COUNTER (Fixed)
-// =========================================
+  // 3. RSVP GUEST COUNTER (Fixed)
+  // =========================================
 
-const guestsInput = document.getElementById("guests");
-const guestMinus = document.getElementById("guestMinus") || document.querySelector('[data-action="minus"]');
-const guestPlus = document.getElementById("guestPlus") || document.querySelector('[data-action="plus"]');
+  const guestsInput = document.getElementById("guests");
+  const guestMinus = document.getElementById("guestMinus") || document.querySelector('[data-action="minus"]');
+  const guestPlus = document.getElementById("guestPlus") || document.querySelector('[data-action="plus"]');
 
-if (guestsInput && guestMinus && guestPlus) {
-  guestMinus.addEventListener("click", () => {
-    const currentValue = Number(guestsInput.value) || 1;
-    const minGuests = Number(guestsInput.min) || 1;
+  if (guestsInput && guestMinus && guestPlus) {
+    guestMinus.addEventListener("click", () => {
+      const currentValue = Number(guestsInput.value) || 1;
+      const minGuests = Number(guestsInput.min) || 1;
 
-    if (currentValue > minGuests) {
-      guestsInput.value = currentValue - 1;
-    }
-  });
+      if (currentValue > minGuests) {
+        guestsInput.value = currentValue - 1;
+      }
+    });
 
-  guestPlus.addEventListener("click", () => {
-    const currentValue = Number(guestsInput.value) || 1;
-    const maxGuests = Number(guestsInput.max) || 10;
+    guestPlus.addEventListener("click", () => {
+      const currentValue = Number(guestsInput.value) || 1;
+      const maxGuests = Number(guestsInput.max) || 10;
 
-    if (currentValue < maxGuests) {
-      guestsInput.value = currentValue + 1;
-    }
-  });
-}
+      if (currentValue < maxGuests) {
+        guestsInput.value = currentValue + 1;
+      }
+    });
+  }
   // =========================================
   // 4. RSVP FORM + GOOGLE SHEETS
   // =========================================
@@ -208,19 +208,112 @@ if (guestsInput && guestMinus && guestPlus) {
   const musicBtn = document.getElementById("musicBtn");
   const weddingAudio = document.getElementById("weddingAudio");
 
+  const musicFiles = {
+    1: "assets/حسين الجسمي - زفة إدخلي عمري.mp3",
+    2: "assets/Ed Sheeran - Perfect (Official Music Video) (mp3cut.net).mp3"
+  };
+
+  let selectedTrack = null;
+  let musicSelectionPromise = null;
+
+  function selectVisitorMusic() {
+    if (selectedTrack) {
+      return Promise.resolve(selectedTrack);
+    }
+
+    if (musicSelectionPromise) {
+      return musicSelectionPromise;
+    }
+
+    musicSelectionPromise = new Promise((resolve) => {
+      const callbackName =
+        "musicCallback_" +
+        Date.now() +
+        "_" +
+        Math.floor(Math.random() * 100000);
+
+      const script = document.createElement("script");
+      let timeoutId;
+
+      function cleanup() {
+        clearTimeout(timeoutId);
+        script.remove();
+        delete window[callbackName];
+      }
+
+      window[callbackName] = (response) => {
+        cleanup();
+
+        if (
+          response &&
+          response.success &&
+          musicFiles[response.track]
+        ) {
+          selectedTrack = response.track;
+
+          weddingAudio.src = musicFiles[selectedTrack];
+          weddingAudio.load();
+
+          resolve(selectedTrack);
+        } else {
+          // Keep the existing audio source if selection fails.
+          resolve(null);
+        }
+      };
+
+      script.onerror = () => {
+        cleanup();
+        resolve(null);
+      };
+
+      timeoutId = setTimeout(() => {
+        cleanup();
+        resolve(null);
+      }, 10000);
+
+      script.src =
+        GOOGLE_SCRIPT_URL +
+        "?action=nextTrack&callback=" +
+        encodeURIComponent(callbackName) +
+        "&_=" +
+        Date.now();
+
+      document.head.appendChild(script);
+    });
+
+    return musicSelectionPromise;
+  }
+
+  async function playWeddingMusic() {
+    if (!weddingAudio) return;
+
+    try {
+      await selectVisitorMusic();
+
+      await weddingAudio.play();
+
+      if (musicBtn) {
+        musicBtn.textContent = "❚❚";
+        musicBtn.setAttribute("aria-label", "Pause music");
+      }
+    } catch (error) {
+      console.error("Music playback error:", error);
+
+      if (musicBtn) {
+        musicBtn.textContent = "♫";
+        musicBtn.setAttribute("aria-label", "Play music");
+      }
+    }
+  }
+  // Select this visitor's track early, before the envelope is opened.
+  selectVisitorMusic();
   if (musicBtn && weddingAudio) {
     musicBtn.addEventListener("click", async () => {
       if (weddingAudio.paused) {
-        try {
-          await weddingAudio.play();
-          musicBtn.textContent = "❚❚";
-          musicBtn.setAttribute("aria-label", "Pause music");
-        } catch (error) {
-          console.error("Music playback error:", error);
-          alert("Unable to play the music. Please try again.");
-        }
+        await playWeddingMusic();
       } else {
         weddingAudio.pause();
+
         musicBtn.textContent = "♫";
         musicBtn.setAttribute("aria-label", "Play music");
       }
@@ -326,21 +419,14 @@ if (guestsInput && guestMinus && guestPlus) {
       // Hide the envelope faster: 1.5 seconds
       setTimeout(() => {
         weddingOpening.classList.add("hide");
-      }, 1500);
+      }, 1800);
 
-      // Start the wedding music
+
+      // Start the music assigned to this visitor
       if (weddingAudio && weddingAudio.paused) {
-        try {
-          await weddingAudio.play();
-
-          if (musicBtn) {
-            musicBtn.textContent = "❚❚";
-            musicBtn.setAttribute("aria-label", "Pause music");
-          }
-        } catch (error) {
-          console.log("Music can be started using the music button.");
-        }
+        await playWeddingMusic();
       }
+
     });
   }
 

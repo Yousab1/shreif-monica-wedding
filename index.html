@@ -37,15 +37,13 @@
     <div class="wedding-confetti" id="weddingConfetti"></div>
 
     <div class="envelope-scene">
+
+      <!-- Invitation card -->
       <div class="invitation-card">
         <div class="invitation-inner">
           <span class="invitation-small">TOGETHER FOREVER</span>
 
-          <h1>
-            SHERIF
-            <span>&</span>
-            MONICA
-          </h1>
+          <h1>SHERIF <span>&amp;</span> MONICA</h1>
 
           <div class="invitation-divider">
             <i></i>
@@ -58,15 +56,16 @@
         </div>
       </div>
 
+      <!-- Decorative envelope -->
       <div class="envelope">
         <div class="envelope-back"></div>
         <div class="envelope-pocket"></div>
         <div class="envelope-flap"></div>
 
-        <div class="envelope-seal">
-          ♡
-        </div>
+        <!-- Click the seal to open the invitation -->
+        <button class="envelope-seal" aria-label="Open invitation">♡</button>
       </div>
+
     </div>
   </div>
 
@@ -74,10 +73,10 @@
   <header class="site-header" id="home">
     <a class="brand" href="#home" aria-label="Sherif and Monica home">
       <span class="brand-mark">♡</span>
-      <span>SHERIF <b>&</b> MONICA</span>
+      <span>SHERIF <b>&amp;</b> MONICA</span>
     </a>
 
-    <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">
+    <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-expanded="false">
       <span></span>
       <span></span>
       <span></span>
@@ -92,12 +91,11 @@
       <a href="#giftbook">Gift Book</a>
     </nav>
 
-    <audio id="weddingAudio" loop>
-      <source src="assets/Ed Sheeran - Perfect (Official Music Video) (mp3cut.net).mp3" type="audio/mpeg" />
-    </audio>
+    <audio id="weddingAudio" loop preload="none"></audio>
   </header>
 
-  <button class="music-btn floating-music" id="musicBtn" type="button" aria-label="Toggle music">
+  <!-- FLOATING MUSIC BUTTON -->
+  <button class="music-btn floating-music" id="musicBtn" type="button" aria-label="Play music">
     ♫
   </button>
 
@@ -238,7 +236,7 @@
     <!-- WEDDING DETAILS -->
     <section class="details" id="details">
       <div class="details-image">
-        <img src="assets/الكنيسة.jpg" alt="Church exterior" />
+        <img src="assets/الكنيسة.webp" alt="Church exterior" />
       </div>
 
       <div class="details-content">
