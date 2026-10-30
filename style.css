@@ -431,7 +431,6 @@ h3 {
   flex-shrink: 0;
 }
 
-/* حركة التايملاين التلقائية لجميع الشاشات */
 @keyframes timelineMarquee {
   0% {
     transform: translateX(0);
@@ -1014,7 +1013,6 @@ fieldset {
     flex-direction: column;
   }
 
-  /* Gallery Mobile Override */
   .gallery {
     padding: 40px 0 60px;
   }
@@ -1095,7 +1093,6 @@ fieldset {
   }
 }
 
-/* Language Button */
 .language-btn {
   border: 1px solid rgba(139, 111, 71, 0.5);
   background: transparent;
@@ -1126,36 +1123,25 @@ fieldset {
   }
 }
 
-/* Floating Music Button */
 .floating-music {
   position: fixed;
   right: 22px;
   top: 50%;
   transform: translateY(-50%);
-
   width: 56px;
   height: 56px;
-
   border: 1px solid rgba(255, 255, 255, 0.7);
   border-radius: 50%;
-
   background: rgba(255, 255, 255, 0.95);
   color: #8b6f47;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   font-size: 25px;
   cursor: pointer;
-
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
-
   z-index: 9999;
-
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .floating-music:hover {
@@ -1172,10 +1158,6 @@ fieldset {
   }
 }
 
-/* =========================================
-   WEDDING OPENING — ORIGINAL ENVELOPE DESIGN
-========================================= */
-
 .wedding-opening {
   position: fixed;
   inset: 0;
@@ -1187,11 +1169,7 @@ fieldset {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background:
-    radial-gradient(circle at 50% 45%,
-      #fffefa 0%,
-      #faf5ed 45%,
-      #f1e7da 100%);
+  background: radial-gradient(circle at 50% 45%, #fffefa 0%, #faf5ed 45%, #f1e7da 100%);
   transition: opacity 1.2s ease, visibility 1.2s ease;
 }
 
@@ -1251,14 +1229,9 @@ fieldset {
   bottom: 8%;
   width: 42%;
   height: 1px;
-  background: linear-gradient(90deg,
-      transparent,
-      rgba(151, 119, 72, .6),
-      transparent);
+  background: linear-gradient(90deg, transparent, rgba(151, 119, 72, .6), transparent);
   transform: translateX(-50%);
 }
-
-
 
 .envelope-seal {
   position: absolute;
@@ -1282,8 +1255,6 @@ fieldset {
   -webkit-tap-highlight-color: transparent;
 }
 
-
-
 .envelope-seal::before {
   content: "";
   position: absolute;
@@ -1297,18 +1268,13 @@ fieldset {
   width: min(430px, 61vw);
   aspect-ratio: .70 / 1;
   bottom: 10%;
-  background:
-    linear-gradient(rgba(255, 254, 250, .12), rgba(255, 254, 250, .12)),
-    url("assets/envelope-card.webp") center / cover no-repeat,
-    #fffefa;
+  background: linear-gradient(rgba(255, 254, 250, .12), rgba(255, 254, 250, .12)), url("assets/envelope-card.webp") center / cover no-repeat, #fffefa;
   border: 1px solid rgba(151, 119, 72, .45);
   box-shadow: 0 20px 50px rgba(70, 50, 30, .14);
   z-index: 2;
   opacity: 0;
   transform: translateY(18%) scale(.94);
-  transition:
-    transform 1.7s cubic-bezier(.2, .8, .2, 1),
-    opacity .8s ease;
+  transition: transform 1.7s cubic-bezier(.2, .8, .2, 1), opacity .8s ease;
   overflow: hidden;
 }
 
@@ -1332,7 +1298,6 @@ fieldset {
   background: rgba(255, 255, 255, 0.78);
   box-sizing: border-box;
 }
-
 
 .invitation-small {
   font-family: "Montserrat", sans-serif;
@@ -1392,8 +1357,6 @@ fieldset {
   color: #403a34;
 }
 
-/* Open animation */
-
 .wedding-opening.play .envelope-flap {
   transform: rotateX(-180deg);
 }
@@ -1415,153 +1378,6 @@ fieldset {
   pointer-events: none;
 }
 
-/* Seal animation */
-
-@keyframes sealVibration {
-
-  0%,
-  72%,
-  100% {
-    margin-left: 0;
-  }
-
-  74% {
-    margin-left: -4px;
-  }
-
-  76% {
-    margin-left: 4px;
-  }
-
-  78% {
-    margin-left: -3px;
-  }
-
-  80% {
-    margin-left: 3px;
-  }
-
-  82% {
-    margin-left: 0;
-  }
-}
-
-/* Tablet and mobile */
-
-@media (max-width: 768px) {
-  .envelope-scene {
-    width: 100vw;
-    height: 78dvh;
-  }
-
-  .envelope {
-    width: 91vw;
-    bottom: 7%;
-  }
-
-  .envelope-back::before {
-    inset: 9px;
-  }
-
-  .invitation-card {
-    width: 58vw;
-    bottom: 11%;
-  }
-
-  .invitation-inner {
-    padding: 24px;
-  }
-
-  .invitation-small {
-    font-size: 7px;
-    letter-spacing: 2.5px;
-    margin-bottom: 19px;
-  }
-
-  .invitation-card h1 {
-    font-size: 38px;
-    letter-spacing: 2px;
-  }
-
-  .invitation-card h1 span {
-    margin: 7px 0;
-  }
-
-  .invitation-divider {
-    margin: 22px 0 15px;
-  }
-
-  .invitation-divider i {
-    width: 27px;
-  }
-
-  .invitation-card p {
-    font-size: 7px;
-    letter-spacing: 1.8px;
-  }
-
-  .invitation-card strong {
-    font-size: 9px;
-    letter-spacing: 2.5px;
-  }
-
-  .envelope-seal {
-    width: 54px;
-    height: 54px;
-    font-size: 20px;
-  }
-
-  .envelope::before,
-  .envelope::after {
-    font-size: 25px;
-  }
-
-  .envelope::before {
-    left: 15px;
-    bottom: 13px;
-  }
-
-  .envelope::after {
-    right: 15px;
-    bottom: 13px;
-  }
-}
-
-@media (max-width: 380px) {
-  .envelope-scene {
-    height: 75dvh;
-  }
-
-  .envelope {
-    width: 94vw;
-  }
-
-  .invitation-card {
-    width: 61vw;
-  }
-
-  .invitation-card h1 {
-    font-size: 34px;
-  }
-
-  .envelope-seal {
-    width: 48px;
-    height: 48px;
-  }
-}
-
-/* =========================================
-   WEDDING CONFETTI / FALLING PARTICLES FIX
-========================================= */
-
-.wedding-confetti {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  overflow: hidden;
-  z-index: 10;
-}
-
 .wedding-confetti span,
 .falling-particle {
   position: fixed;
@@ -1577,23 +1393,10 @@ fieldset {
 }
 
 @keyframes fallConfetti {
-  0% {
-    transform: translateY(-20px) rotate(0deg);
-    opacity: 0;
-  }
-
-  10% {
-    opacity: 1;
-  }
-
-  90% {
-    opacity: 1;
-  }
-
-  100% {
-    transform: translateY(105vh) rotate(360deg);
-    opacity: 0;
-  }
+  0% { transform: translateY(-20px) rotate(0deg); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(105vh) rotate(360deg); opacity: 0; }
 }
 
 .footer a {
@@ -1605,18 +1408,12 @@ fieldset {
   height: 100%;
   object-fit: cover;
   min-height: 480px;
-
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%),
-    linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
   -webkit-mask-composite: source-in;
-  mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%),
-    linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
   mask-composite: intersect;
 }
 
-/* =========================================
-   FALLING DECORATIONS (SCROLL SNOW/RAIN EFFECT)
-========================================= */
 .falling-particle {
   position: fixed;
   top: -50px;
@@ -1628,26 +1425,12 @@ fieldset {
 }
 
 @keyframes fallDown {
-  0% {
-    transform: translateY(0) rotate(0deg) scale(0.8);
-    opacity: 1;
-  }
-
-  100% {
-    transform: translateY(105vh) rotate(360deg) scale(1.2);
-    opacity: 0;
-  }
+  0% { transform: translateY(0) rotate(0deg) scale(0.8); opacity: 1; }
+  100% { transform: translateY(105vh) rotate(360deg) scale(1.2); opacity: 0; }
 }
 
-
-/* =========================================
-   SHREIF & MONICA — GIFT BOOK
-========================================= */
-
 .giftbook-section {
-  background:
-    radial-gradient(ellipse at top, rgba(255, 253, 249, 0.95), transparent 65%),
-    var(--ivory);
+  background: radial-gradient(ellipse at top, rgba(255, 253, 249, 0.95), transparent 65%), var(--ivory);
   text-align: center;
   overflow: hidden;
 }
@@ -1676,9 +1459,7 @@ fieldset {
   background: linear-gradient(135deg, #e8d7bd, #c9a875, #eadbc5);
   border: 1px solid rgba(159, 123, 62, 0.45);
   border-radius: 5px;
-  box-shadow:
-    0 25px 65px rgba(59, 45, 39, 0.13),
-    inset 0 0 0 3px rgba(255, 253, 249, 0.45);
+  box-shadow: 0 25px 65px rgba(59, 45, 39, 0.13), inset 0 0 0 3px rgba(255, 253, 249, 0.45);
   position: relative;
 }
 
@@ -1711,9 +1492,7 @@ fieldset {
 .giftbook-page {
   min-height: 390px;
   padding: clamp(28px, 6vw, 52px);
-  background:
-    linear-gradient(rgba(255, 253, 249, 0.96), rgba(250, 247, 242, 0.97)),
-    var(--white);
+  background: linear-gradient(rgba(255, 253, 249, 0.96), rgba(250, 247, 242, 0.97)), var(--white);
   border: 1px solid rgba(159, 123, 62, 0.35);
   border-radius: 2px;
   box-shadow: 0 5px 20px rgba(59, 45, 39, 0.08);
@@ -1876,87 +1655,9 @@ fieldset {
 }
 
 @keyframes giftbookFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
 }
-
-@media (max-width: 600px) {
-  .giftbook-section {
-    padding-left: 16px;
-    padding-right: 16px;
-  }
-
-  .giftbook-heading {
-    margin-bottom: 30px;
-  }
-
-  .giftbook-book {
-    padding: 12px;
-  }
-
-  .giftbook-page {
-    min-height: 350px;
-    padding: 30px 22px;
-  }
-
-  .giftbook-page::before {
-    inset: 8px;
-  }
-
-  .giftbook-topline {
-    gap: 10px;
-  }
-
-  .giftbook-topline-text {
-    font-size: 8px;
-    letter-spacing: 2px;
-  }
-
-  .giftbook-message-area {
-    min-height: 145px;
-  }
-
-  .giftbook-controls {
-    gap: 7px;
-  }
-
-  .giftbook-nav {
-    gap: 5px;
-    padding: 8px 10px;
-    font-size: 9px;
-  }
-
-  .giftbook-page-count {
-    font-size: 9px;
-    letter-spacing: 0;
-  }
-
-  .giftbook-footnote {
-    font-size: 17px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .giftbook-entry {
-    animation: none;
-  }
-
-  .giftbook-nav {
-    transition: none;
-  }
-}
-
-
-/* =========================================
-   SHREIF & MONICA — GIFT BOOK COVER
-========================================= */
 
 .giftbook-cover {
   width: min(100%, 620px);
@@ -1979,8 +1680,7 @@ fieldset {
   text-align: center;
   overflow: hidden;
   color: #745a3c;
-  background:
-    radial-gradient(ellipse at center, #fffdf8 0%, #f8f0df 100%);
+  background: radial-gradient(ellipse at center, #fffdf8 0%, #f8f0df 100%);
   border: 1px solid rgba(155, 115, 55, 0.65);
   outline: 1px solid rgba(155, 115, 55, 0.4);
   outline-offset: -9px;
@@ -2095,11 +1795,7 @@ fieldset {
   font-size: 11px;
   letter-spacing: 1.4px;
   cursor: pointer;
-  transition:
-    background 0.3s ease,
-    color 0.3s ease,
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
+  transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .giftbook-open-btn span {
@@ -2120,51 +1816,190 @@ fieldset {
   letter-spacing: 3px;
 }
 
-/* Cover opening animation */
-
 .giftbook-cover.is-opening {
   opacity: 0;
   transform: translateY(-12px) scale(0.96);
   pointer-events: none;
 }
 
-/* Smoothly reveal the book */
-
 .giftbook-content:not([hidden]) {
   animation: giftbookOpenReveal 0.65s ease both;
 }
 
 @keyframes giftbookOpenReveal {
-  from {
-    opacity: 0;
-    transform: translateY(18px);
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* =========================================
+   SOBA CHAT ASSISTANT & IMAGE LAYOUT
+========================================= */
+
+.soba-section {
+  background: var(--ivory);
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.soba-wrapper {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.soba-chat-container {
+  background: var(--white);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--line);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 420px;
+}
+
+.soba-chat-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  background: var(--cream);
+  border-bottom: 1px solid var(--line);
+}
+
+.soba-avatar {
+  font-size: 24px;
+  background: var(--white);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+}
+
+.soba-chat-header strong {
+  font-family: var(--serif);
+  font-size: 18px;
+  display: block;
+  color: var(--brown);
+}
+
+.soba-chat-header small {
+  font-size: 10px;
+  color: var(--gold-dark);
+  letter-spacing: 0.5px;
+}
+
+.soba-chat-messages {
+  padding: 24px;
+  flex-grow: 1;
+  max-height: 380px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.soba-msg {
+  max-width: 80%;
+  padding: 14px 18px;
+  border-radius: 12px;
+  font-size: 13px;
+  line-height: 1.5;
+  animation: sobaFadeIn 0.3s ease;
+}
+
+.soba-msg.bot {
+  background: var(--cream);
+  color: var(--brown);
+  align-self: flex-start;
+  border-bottom-left-radius: 2px;
+}
+
+.soba-msg.user {
+  background: var(--gold);
+  color: white;
+  align-self: flex-end;
+  border-bottom-right-radius: 2px;
+}
+
+.soba-chat-input-area {
+  padding: 16px 20px;
+  background: var(--white);
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.soba-option-btn {
+  background: transparent;
+  border: 1px solid var(--gold);
+  color: var(--gold-dark);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.soba-option-btn:hover {
+  background: var(--gold);
+  color: white;
+  transform: translateY(-1px);
+}
+
+.soba-image-box {
+  position: relative;
+  padding: 14px;
+  border: 1px solid var(--gold);
+  border-radius: 14px;
+  background: var(--white);
+  box-shadow: var(--shadow);
+  transform: rotate(2deg);
+  transition: transform 0.3s ease;
+}
+
+.soba-image-box:hover {
+  transform: rotate(0deg) scale(1.02);
+}
+
+.soba-image-box img {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+@media (max-width: 980px) {
+  .soba-wrapper {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  
+  /* تخلي الصورة تيجي فوق على الموبايل */
+  .soba-image-box {
+    order: 1; /* الصورة أولاً */
+    max-width: 400px;
+    margin: 0 auto;
+    transform: rotate(0deg);
   }
 
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  /* الشات يجي تحت الصورة على الموبايل */
+  .soba-chat-container {
+    order: 2; /* الشات ثانياً */
+  }
+  
+  .soba-image-box img {
+    height: 320px;
   }
 }
 
-@media (max-width: 600px) {
-  .giftbook-cover {
-    padding: 8px;
-  }
-
-  .giftbook-cover-inner {
-    min-height: 470px;
-    padding: 40px 18px 30px;
-  }
-
-  .giftbook-cover-names {
-    font-size: 39px;
-  }
-
-  .giftbook-cover-message {
-    font-size: 16px;
-  }
-
-  .giftbook-cover-eyebrow {
-    letter-spacing: 3px;
-  }
+@keyframes sobaFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
 }

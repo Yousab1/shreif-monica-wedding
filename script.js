@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", () => {
   // =========================================
   // 1. COUNTDOWN
@@ -78,12 +77,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   // =========================================
-  // 3. RSVP GUEST COUNTER (Fixed)
+  // 3. RSVP GUEST COUNTER
   // =========================================
 
   const guestsInput = document.getElementById("guests");
-  const guestMinus = document.getElementById("guestMinus") || document.querySelector('[data-action="minus"]');
-  const guestPlus = document.getElementById("guestPlus") || document.querySelector('[data-action="plus"]');
+  const guestMinus = document.querySelector('[data-action="minus"]');
+  const guestPlus = document.querySelector('[data-action="plus"]');
 
   if (guestsInput && guestMinus && guestPlus) {
     guestMinus.addEventListener("click", () => {
@@ -104,6 +103,8 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
+
+
   // =========================================
   // 4. RSVP FORM + GOOGLE SHEETS
   // =========================================
@@ -256,7 +257,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
           resolve(selectedTrack);
         } else {
-          // Keep the existing audio source if selection fails.
           resolve(null);
         }
       };
@@ -289,7 +289,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     try {
       await selectVisitorMusic();
-
       await weddingAudio.play();
 
       if (musicBtn) {
@@ -298,14 +297,13 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     } catch (error) {
       console.error("Music playback error:", error);
-
       if (musicBtn) {
         musicBtn.textContent = "♫";
         musicBtn.setAttribute("aria-label", "Play music");
       }
     }
   }
-  // Select this visitor's track early, before the envelope is opened.
+
   selectVisitorMusic();
   if (musicBtn && weddingAudio) {
     musicBtn.addEventListener("click", async () => {
@@ -313,7 +311,6 @@ document.addEventListener("DOMContentLoaded", () => {
         await playWeddingMusic();
       } else {
         weddingAudio.pause();
-
         musicBtn.textContent = "♫";
         musicBtn.setAttribute("aria-label", "Play music");
       }
@@ -327,17 +324,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   // =========================================
-  // 6. WEDDING CONFETTI
+  // 6. WEDDING CONFETTI & PARTICLES
   // =========================================
 
-  const confettiContainer = document.getElementById(
-    "weddingConfetti"
-  );
+  const confettiContainer = document.getElementById("weddingConfetti");
 
   if (confettiContainer) {
     for (let i = 0; i < 55; i++) {
       const piece = document.createElement("span");
-
       const x = Math.random() * window.innerWidth;
       const delay = Math.random() * 5;
       const duration = 4 + Math.random() * 5;
@@ -345,37 +339,27 @@ document.addEventListener("DOMContentLoaded", () => {
       piece.style.setProperty("--x", `${x}px`);
       piece.style.setProperty("--delay", `${delay}s`);
       piece.style.setProperty("--duration", `${duration}s`);
-
       confettiContainer.appendChild(piece);
     }
   }
 
-
-  // =========================================
-  // 7. FALLING PARTICLES
-  // =========================================
-
   function createFallingParticle(burst = false) {
     const particle = document.createElement("div");
-
     particle.className = "falling-particle";
     particle.textContent = Math.random() > 0.5 ? "♡" : "✦";
 
     if (burst) {
-      // Random position across the screen for the opening burst
       particle.style.left = `${10 + Math.random() * 80}%`;
       particle.style.top = `${10 + Math.random() * 75}%`;
       particle.style.animationDuration = `${1.5 + Math.random() * 2}s`;
       particle.style.fontSize = `${18 + Math.random() * 22}px`;
       particle.style.zIndex = "1000000";
     } else {
-      // Keep the existing falling effect unchanged
       particle.style.left = `${Math.random() * 100}%`;
       particle.style.animationDuration = `${5 + Math.random() * 5}s`;
     }
 
     particle.style.opacity = `${0.3 + Math.random() * 0.5}`;
-
     document.body.appendChild(particle);
 
     setTimeout(() => {
@@ -383,12 +367,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }, burst ? 4000 : 11000);
   }
 
-  // Existing continuous falling decorations
   setInterval(() => createFallingParticle(false), 400);
 
 
   // =========================================
-  // 8. OPENING ENVELOPE
+  // 7. OPENING ENVELOPE
   // =========================================
 
   const weddingOpening = document.getElementById("weddingOpening");
@@ -400,39 +383,179 @@ document.addEventListener("DOMContentLoaded", () => {
       event.preventDefault();
       event.stopPropagation();
 
-      // Prevent opening the envelope more than once
-      if (weddingOpening.classList.contains("play")) {
-        return;
-      }
+      if (weddingOpening.classList.contains("play")) return;
 
-      // Open the envelope
       weddingOpening.classList.add("play");
 
-      // Show a random burst of decorations when the seal is clicked
       for (let i = 0; i < 25; i++) {
         setTimeout(() => {
           createFallingParticle(true);
         }, Math.random() * 500);
       }
 
-
-      // Hide the envelope faster: 1.5 seconds
       setTimeout(() => {
         weddingOpening.classList.add("hide");
       }, 1800);
 
-
-      // Start the music assigned to this visitor
       if (weddingAudio && weddingAudio.paused) {
         await playWeddingMusic();
       }
-
     });
   }
 
 
   // =========================================
-  // GIFT BOOK COVER — OPEN BOOK
+  // 8. SOBA CHAT ASSISTANT (CONNECTED TO 5 DRESS CODE COLORS)
+  // =========================================
+
+  const sobaMessages = document.getElementById("sobaMessages");
+  const sobaInputArea = document.getElementById("sobaInputArea");
+
+  if (sobaMessages && sobaInputArea) {
+    const sobaQuestions = [
+      {
+        question: "Hey gorgeous! ✨ I'm Soba, your little color-match assistant. Not sure which color suits your vibe? Let me help! What's your ideal weekend?",
+        options: [
+          { text: "A cozy day at home 🏡", colorKey: "babyBlue" },
+          { text: "A fancy dinner with friends 🍷", colorKey: "pastelLilac" },
+          { text: "A sunny day outdoors ☀️", colorKey: "butterYellow" },
+          { text: "A romantic evening 🕯️", colorKey: "pastelPink" },
+          { text: "A fun day full of adventures 🎒", colorKey: "mintGreen" }
+        ]
+      },
+      {
+        question: "Which word describes your personality best?",
+        options: [
+          { text: "Elegant 🤍", colorKey: "pastelLilac" },
+          { text: "Romantic 🌸", colorKey: "pastelPink" },
+          { text: "Calm 🌊", colorKey: "babyBlue" },
+          { text: "Cheerful 🌻", colorKey: "butterYellow" },
+          { text: "Bold & Fresh 🌿", colorKey: "mintGreen" }
+        ]
+      },
+      {
+        question: "Pick your dream destination.",
+        options: [
+          { text: "Paris 🗼", colorKey: "pastelLilac" },
+          { text: "A tropical beach 🏝️", colorKey: "babyBlue" },
+          { text: "The countryside 🌾", colorKey: "butterYellow" },
+          { text: "A beautiful garden 🌷", colorKey: "mintGreen" },
+          { text: "A luxury city hotel ✨", colorKey: "pastelPink" }
+        ]
+      },
+      {
+        question: "What's your favorite kind of atmosphere?",
+        options: [
+          { text: "Soft and dreamy ☁️", colorKey: "babyBlue" },
+          { text: "Warm and cozy 🔥", colorKey: "butterYellow" },
+          { text: "Fresh and peaceful 🍃", colorKey: "mintGreen" },
+          { text: "Bright and joyful ☀️", colorKey: "butterYellow" },
+          { text: "Chic and sophisticated 💎", colorKey: "pastelLilac" }
+        ]
+      },
+      {
+        question: "How would you like to feel at the wedding?",
+        options: [
+          { text: "Like a princess 👑", colorKey: "pastelPink" },
+          { text: "Graceful and elegant 🦢", colorKey: "babyBlue" },
+          { text: "Fresh and relaxed 🌿", colorKey: "mintGreen" },
+          { text: "Sweet and romantic 💕", colorKey: "pastelLilac" },
+          { text: "Confident and radiant ✨", colorKey: "butterYellow" }
+        ]
+      }
+    ];
+
+    let currentSobaStep = 0;
+    let colorScores = {
+      babyBlue: 0,
+      pastelLilac: 0,
+      butterYellow: 0,
+      mintGreen: 0,
+      pastelPink: 0
+    };
+
+    function appendSobaMessage(text, sender = "bot") {
+      const msgDiv = document.createElement("div");
+      msgDiv.className = `soba-msg ${sender}`;
+      msgDiv.innerHTML = text;
+      sobaMessages.appendChild(msgDiv);
+      sobaMessages.scrollTop = sobaMessages.scrollHeight;
+    }
+
+    function renderSobaStep() {
+      sobaInputArea.innerHTML = "";
+      if (currentSobaStep < sobaQuestions.length) {
+        const q = sobaQuestions[currentSobaStep];
+        appendSobaMessage(q.question, "bot");
+
+        q.options.forEach(opt => {
+          const btn = document.createElement("button");
+          btn.className = "soba-option-btn";
+          btn.textContent = opt.text;
+          btn.addEventListener("click", () => {
+            appendSobaMessage(opt.text, "user");
+            colorScores[opt.colorKey]++;
+            currentSobaStep++;
+            setTimeout(renderSobaStep, 600);
+          });
+          sobaInputArea.appendChild(btn);
+        });
+      } else {
+        let bestColor = "babyBlue";
+        let maxScore = -1;
+        for (let key in colorScores) {
+          if (colorScores[key] > maxScore) {
+            maxScore = colorScores[key];
+            bestColor = key;
+          }
+        }
+
+        const colorDetails = {
+          babyBlue: { name: "Baby Blue", hex: "#d2e4f0", desc: "Soft, dreamy, and utterly graceful. Calm & Graceful 🌊" },
+          pastelLilac: { name: "Pastel Lilac", hex: "#dfcfe8", desc: "Elegant, royal, and full of charm. Elegant & Chic 💜" },
+          butterYellow: { name: "Butter Yellow", hex: "#fef0c7", desc: "Warm, radiant, and beautifully cheerful. Bright & Joyful ☀️" },
+          mintGreen: { name: "Mint Green", hex: "#d1ebd8", desc: "Fresh, serene, and naturally breath-taking. Fresh & Natural 🌿" },
+          pastelPink: { name: "Pastel Pink", hex: "#fad2d9", desc: "Sweet, romantic, and classic. Soft & Romantic 💕" }
+        };
+
+        const result = colorDetails[bestColor];
+
+        appendSobaMessage(`Aww, you're all done! 💕 Based on your wonderful personality, I found your absolute perfect match from our Dress Code:`, "bot");
+
+        const resultDiv = document.createElement("div");
+        resultDiv.className = "soba-msg bot";
+        resultDiv.style.background = "#fff";
+        resultDiv.style.border = "1px solid var(--gold)";
+        resultDiv.innerHTML = `
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+            <span style="width: 34px; height: 34px; border-radius: 50%; background: ${result.hex}; display: inline-block; border: 2px solid var(--gold); box-shadow: 0 3px 10px rgba(0,0,0,0.1);"></span>
+            <strong style="font-size: 16px; color: var(--brown);">${result.name}</strong>
+          </div>
+          <p style="font-size: 12px; color: var(--muted); margin-bottom: 12px;">${result.desc}</p>
+          <a href="#rsvp" class="btn btn-gold" style="padding: 8px 18px; font-size: 9px; min-height: 36px; text-decoration: none; color: white;">CHOOSE THIS COLOR ♡</a>
+        `;
+        sobaMessages.appendChild(resultDiv);
+
+        const resetBtn = document.createElement("button");
+        resetBtn.className = "soba-option-btn";
+        resetBtn.textContent = "Start Over ↺";
+        resetBtn.addEventListener("click", () => {
+          currentSobaStep = 0;
+          colorScores = { babyBlue: 0, pastelLilac: 0, butterYellow: 0, mintGreen: 0, pastelPink: 0 };
+          sobaMessages.innerHTML = "";
+          renderSobaStep();
+        });
+        sobaInputArea.appendChild(resetBtn);
+        sobaMessages.scrollTop = sobaMessages.scrollHeight;
+      }
+    }
+
+    renderSobaStep();
+  }
+
+
+  // =========================================
+  // 9. GIFT BOOK COVER & LOAD MESSAGES
   // =========================================
 
   const giftbookCover = document.getElementById("giftbookCover");
@@ -451,42 +574,16 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-
-
-  // =========================================
-  // 9. GIFT BOOK — LOAD MESSAGES FROM GOOGLE SHEETS
-  // =========================================
-
   const giftbookSection = document.getElementById("giftbook");
 
   if (giftbookSection) {
-    const giftbookStatus = document.getElementById(
-      "giftbookStatus"
-    );
-
-    const giftbookEntry = document.getElementById(
-      "giftbookEntry"
-    );
-
-    const giftbookMessage = document.getElementById(
-      "giftbookMessage"
-    );
-
-    const giftbookName = document.getElementById(
-      "giftbookName"
-    );
-
-    const giftbookPrev = document.getElementById(
-      "giftbookPrev"
-    );
-
-    const giftbookNext = document.getElementById(
-      "giftbookNext"
-    );
-
-    const giftbookPageCount = document.getElementById(
-      "giftbookPageCount"
-    );
+    const giftbookStatus = document.getElementById("giftbookStatus");
+    const giftbookEntry = document.getElementById("giftbookEntry");
+    const giftbookMessage = document.getElementById("giftbookMessage");
+    const giftbookName = document.getElementById("giftbookName");
+    const giftbookPrev = document.getElementById("giftbookPrev");
+    const giftbookNext = document.getElementById("giftbookNext");
+    const giftbookPageCount = document.getElementById("giftbookPageCount");
 
     let giftMessages = [];
     let currentGiftPage = 0;
@@ -496,67 +593,30 @@ document.addEventListener("DOMContentLoaded", () => {
         giftbookStatus.textContent = message;
         giftbookStatus.hidden = false;
       }
-
-      if (giftbookEntry) {
-        giftbookEntry.hidden = true;
-      }
-
-      if (giftbookPageCount) {
-        giftbookPageCount.textContent = "Page 0 of 0";
-      }
-
-      if (giftbookPrev) {
-        giftbookPrev.disabled = true;
-      }
-
-      if (giftbookNext) {
-        giftbookNext.disabled = true;
-      }
+      if (giftbookEntry) giftbookEntry.hidden = true;
+      if (giftbookPageCount) giftbookPageCount.textContent = "Page 0 of 0";
+      if (giftbookPrev) giftbookPrev.disabled = true;
+      if (giftbookNext) giftbookNext.disabled = true;
     }
 
     function renderGiftbookPage() {
       if (!giftMessages.length) {
-        showGiftbookStatus(
-          "No wishes yet. Be the first to leave a message in the RSVP form. ♡"
-        );
+        showGiftbookStatus("No wishes yet. Be the first to leave a message in the RSVP form. ♡");
         return;
       }
 
       const currentMessage = giftMessages[currentGiftPage];
+      if (!currentMessage) return;
 
-      if (!currentMessage) {
-        return;
-      }
-
-      if (giftbookStatus) {
-        giftbookStatus.hidden = true;
-      }
-
-      if (giftbookEntry) {
-        giftbookEntry.hidden = false;
-      }
-
-      if (giftbookMessage) {
-        giftbookMessage.textContent = currentMessage.message;
-      }
-
-      if (giftbookName) {
-        giftbookName.textContent = ` ${currentMessage.name} ♡`;
-      }
-
+      if (giftbookStatus) giftbookStatus.hidden = true;
+      if (giftbookEntry) giftbookEntry.hidden = false;
+      if (giftbookMessage) giftbookMessage.textContent = currentMessage.message;
+      if (giftbookName) giftbookName.textContent = ` ${currentMessage.name} ♡`;
       if (giftbookPageCount) {
-        giftbookPageCount.textContent =
-          `Page ${currentGiftPage + 1} of ${giftMessages.length}`;
+        giftbookPageCount.textContent = `Page ${currentGiftPage + 1} of ${giftMessages.length}`;
       }
-
-      if (giftbookPrev) {
-        giftbookPrev.disabled = currentGiftPage === 0;
-      }
-
-      if (giftbookNext) {
-        giftbookNext.disabled =
-          currentGiftPage >= giftMessages.length - 1;
-      }
+      if (giftbookPrev) giftbookPrev.disabled = currentGiftPage === 0;
+      if (giftbookNext) giftbookNext.disabled = currentGiftPage >= giftMessages.length - 1;
     }
 
     if (giftbookPrev) {
@@ -580,55 +640,30 @@ document.addEventListener("DOMContentLoaded", () => {
     function loadGiftbookMessages() {
       showGiftbookStatus("Loading your beautiful wishes...");
 
-      const callbackName =
-        "giftbookCallback_" +
-        Date.now() +
-        "_" +
-        Math.random().toString(36).slice(2);
-
+      const callbackName = "giftbookCallback_" + Date.now() + "_" + Math.random().toString(36).slice(2);
       const script = document.createElement("script");
-
       let finished = false;
 
       const cleanup = () => {
-        if (script.parentNode) {
-          script.parentNode.removeChild(script);
-        }
-
-        if (window[callbackName]) {
-          delete window[callbackName];
-        }
-
+        if (script.parentNode) script.parentNode.removeChild(script);
+        if (window[callbackName]) delete window[callbackName];
         clearTimeout(timeoutId);
       };
 
       const timeoutId = setTimeout(() => {
         if (finished) return;
-
         finished = true;
         cleanup();
-
-        showGiftbookStatus(
-          "We couldn't load the wishes right now. Please refresh the page and try again."
-        );
+        showGiftbookStatus("We couldn't load the wishes right now. Please try again later.");
       }, 15000);
 
       window[callbackName] = (response) => {
         if (finished) return;
-
         finished = true;
         cleanup();
 
         if (!response || response.success !== true) {
-          console.error(
-            "Gift Book response error:",
-            response?.error || "Invalid response"
-          );
-
-          showGiftbookStatus(
-            "We couldn't load the wishes right now. Please try again later."
-          );
-
+          showGiftbookStatus("We couldn't load the wishes right now. Please try again later.");
           return;
         }
 
@@ -647,9 +682,7 @@ document.addEventListener("DOMContentLoaded", () => {
         currentGiftPage = 0;
 
         if (!giftMessages.length) {
-          showGiftbookStatus(
-            "No wishes yet. Be the first to leave a message in the RSVP form. ♡"
-          );
+          showGiftbookStatus("No wishes yet. Be the first to leave a message in the RSVP form. ♡");
           return;
         }
 
@@ -658,22 +691,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
       script.onerror = () => {
         if (finished) return;
-
         finished = true;
         cleanup();
-
-        showGiftbookStatus(
-          "We couldn't connect to the Gift Book. Please refresh the page and try again."
-        );
+        showGiftbookStatus("We couldn't connect to the Gift Book. Please refresh the page.");
       };
 
-      script.src =
-        GOOGLE_SCRIPT_URL +
-        "?callback=" +
-        encodeURIComponent(callbackName) +
-        "&_=" +
-        Date.now();
-
+      script.src = GOOGLE_SCRIPT_URL + "?callback=" + encodeURIComponent(callbackName) + "&_=" + Date.now();
       document.head.appendChild(script);
     }
 
